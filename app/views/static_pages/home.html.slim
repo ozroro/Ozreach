@@ -9,12 +9,12 @@
       h3.masthead-brand
         | OzReach
       nav.nav.nav-masthead.justify-content-center
-        a.nav-link.active[href="#"]
+        = link_to root_path, class: "nav-link" do
           | Home
-        a.nav-link[href="#"]
-          | Features
-        a.nav-link[href="#"]
-          | Contact
+        = link_to login_path, class: "nav-link" do
+          | Log in
+        = link_to recruiter_signup_path, class: "nav-link" do
+          | Sign up
   main.inner.cover[role="main"]
     h1.cover-heading
       | Cover your page.
