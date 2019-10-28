@@ -8,7 +8,23 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    .container
+
+  
+    .cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column.text-center
       - if flash.notice.present?
         .alert.alert-success= flash.notice
+
+      = render 'shared/header'
+
       = yield
+      
+      footer.mastfoot.mt-auto
+        .inner
+          p
+            | Cover template for 
+            a[href="https://getbootstrap.com/"]
+              | Bootstrap
+            | , by 
+            a[href="https://twitter.com/mdo"]
+              | @mdo
+            | .

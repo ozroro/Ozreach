@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     user = User::Base.find_by(email: session_params[:email])
 
     if user&.authenticate(session_params[:password])
-      session[:user_id] = user.id
+      log_in(user)
       redirect_to root_path, notice: 'ログインしました。'
     else
       render :new

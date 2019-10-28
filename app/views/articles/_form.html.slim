@@ -1,0 +1,14 @@
+- if article.errors.present?
+  ul#error_explanation
+    - article.errors.full_messages.each do |message|
+      li= message
+
+= form_with model: article, local: true do |f|
+  .form-group
+    = f.label :title, 'タイトル'
+    = f.text_field :title, class: 'form-control'
+  .form-group
+    = f.label :content, '記事内容'
+    = f.text_area :content, class: 'form-control', rows: 30
+
+  = f.submit '登録する', class: 'btn btn-primary'

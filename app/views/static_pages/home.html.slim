@@ -1,35 +1,13 @@
 
+main.inner.cover[role="main"]
+  h1.cover-heading
+    | Cover your page.
+  p.lead
+    | Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.
+  p.lead
+    a.btn.btn-lg.btn-secondary[href="#"]
+      | Learn more
+
+
 
 = stylesheet_link_tag "static_pages", :media => "all"
-
-
-.cover-container.d-flex.w-100.h-100.p-3.mx-auto.flex-column.text-center
-  header.masthead.mb-auto
-    .inner
-      h3.masthead-brand
-        | OzReach
-      nav.nav.nav-masthead.justify-content-center
-        = link_to root_path, class: "nav-link" do
-          | Home
-        = link_to login_path, class: "nav-link" do
-          | Log in
-        = link_to recruiter_signup_path, class: "nav-link" do
-          | Sign up
-  main.inner.cover[role="main"]
-    h1.cover-heading
-      | Cover your page.
-    p.lead
-      | Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.
-    p.lead
-      a.btn.btn-lg.btn-secondary[href="#"]
-        | Learn more
-  footer.mastfoot.mt-auto
-    .inner
-      p
-        | Cover template for 
-        a[href="https://getbootstrap.com/"]
-          | Bootstrap
-        | , by 
-        a[href="https://twitter.com/mdo"]
-          | @mdo
-        | .

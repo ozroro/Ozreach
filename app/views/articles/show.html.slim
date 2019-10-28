@@ -1,0 +1,10 @@
+article.show id="article-#{@article.id}"
+  .h4.title
+    = @article.title
+  p.recruiter
+    = @article.user.name
+  p.content
+    = @article.content
+  .article-footer
+    p
+      = @article.created_at

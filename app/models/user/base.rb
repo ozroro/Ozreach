@@ -14,6 +14,14 @@ class User::Base < ApplicationRecord
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
   
 
+  def recruiter?
+    self.type == 'User::Recruiter'
+  end
+
+  def seeker?
+    self.type == 'User::Seeker'
+  end
+
   private
     # メールアドレスをすべて小文字にする
     def downcase_email

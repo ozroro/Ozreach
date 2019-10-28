@@ -1,0 +1,12 @@
+article.overview id="article-#{article.id}"
+  = link_to article do
+    .h4.title
+      = article.title
+    p.recruiter
+      = article.user.name
+    p.content
+      = article.content
+    .article-footer
+      p
+        = article.created_at
+      
