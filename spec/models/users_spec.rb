@@ -1,5 +1,7 @@
 require 'rails_helper'
 
+
+# 練習のためにずらずら書いたけど、この程度の単純なバリデーションならそもそも書く必要ないかも
 RSpec.describe User::Base, type: :model do
   before do
     @user = FactoryBot.build(:recruiter)
