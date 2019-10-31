@@ -1,2 +1,6 @@
-h1 User::Seekers#new
-p Find me in app/views/user/seekers/new.html.slim
+h1 シーカー登録
+p 
+  | 仕事を探したい！求人を探したい！<br>
+    シーカーの登録<br>
+
+= render partial: 'user/registraion_form', locals: { user: @user }
