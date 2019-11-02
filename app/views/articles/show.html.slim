@@ -2,7 +2,8 @@ article.show id="article-#{@article.id}"
   .h4.title
     = @article.title
   p.recruiter
-    = @article.user.name
+    = link_to @article.user.name, profile_user_recruiter_path(@article.user) 
+  = image_tag @article.image if @article.image.attached?
   p.content
     = @article.content
   .article-footer

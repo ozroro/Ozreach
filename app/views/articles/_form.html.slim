@@ -10,5 +10,8 @@
   .form-group
     = f.label :content, '記事内容'
     = f.text_area :content, class: 'form-control', rows: 30
+  .form-group
+    = f.label :image, '画像'
+    = f.file_field :image, class: 'form-control'
 
   = f.submit '登録する', class: 'btn btn-primary'

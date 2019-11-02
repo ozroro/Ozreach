@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
-  
+  concern :profiles do
+    member do
+      get :profile
+    end
+  end
+
+
   namespace :user do
-    resources :seekers, except: :index
-    resources :recruiters, except: :index 
+    resources :seekers, except: :index, concerns: :profiles
+    resources :recruiters, except: :index, concerns: :profiles
+    resource :profile
   end
   get '/seeker_signup' => 'user/seeker#new'
   get '/recruiter_signup' => 'user/recruiters#new'
