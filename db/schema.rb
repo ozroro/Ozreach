@@ -33,30 +33,30 @@ ActiveRecord::Schema.define(version: 2019_11_01_054508) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "articles", force: :cascade do |t|
+  create_table "recruiter_articles", force: :cascade do |t|
     t.integer "user_id"
     t.string "title"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_articles_on_user_id"
+    t.index ["user_id"], name: "index_recruiter_articles_on_user_id"
   end
 
-  create_table "user_recruiter_profiles", force: :cascade do |t|
-    t.integer "recruiter_id"
+  create_table "recruiter_profiles", force: :cascade do |t|
+    t.integer "user_id"
     t.string "corporate_name"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["recruiter_id"], name: "index_user_recruiter_profiles_on_recruiter_id"
+    t.index ["user_id"], name: "index_recruiter_profiles_on_user_id"
   end
 
-  create_table "user_seeker_profiles", force: :cascade do |t|
-    t.integer "seeker_id"
+  create_table "seeker_profiles", force: :cascade do |t|
+    t.integer "user_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["seeker_id"], name: "index_user_seeker_profiles_on_seeker_id"
+    t.index ["user_id"], name: "index_seeker_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

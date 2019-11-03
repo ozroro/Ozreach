@@ -1,5 +1,5 @@
-class User::ProfilesController < ApplicationController
 #ログインしている自分のプロファイルの表示、編集
+class ProfilesController < ApplicationController
   def show
     @user = current_user
     @profile = current_user.profile
@@ -24,6 +24,6 @@ class User::ProfilesController < ApplicationController
   private 
   def set_user
     id = params[recruiter_id] || params[seeker_id] 
-    User::Base.find(id)
+    User.find(id)
   end
 end

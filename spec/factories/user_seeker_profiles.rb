@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user_seeker_profile, class: 'User::SeekerProfile' do
+  factory :seeker_profile, class: 'Seeker::Profile' do
     user { nil }
     content { "MyText" }
   end

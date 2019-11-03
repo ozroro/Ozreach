@@ -1,7 +1,8 @@
-class User::SeekersController < User::BaseController
+class Seeker::UsersController < UserController
   def create
-    @user = User::Seeker.new(user_params :recruiter)
+    @user = Seeker::User.new(user_params :seeker)
     if @user.save
+      create_profile(@user)
       redirect_to root_url, notice: "ユーザ「#{@user.name}」を登録しました。"
     else
       render :new
@@ -27,4 +28,8 @@ class User::SeekersController < User::BaseController
 
   def destroy
   end
+
+  private
+  def create_profile(user)
+    user.create_profile(content: '設定されていません')
 end

@@ -9,8 +9,7 @@ module SessionsHelper
 
   def current_user
     if (user_id = session[:user_id])
-      # User::Baseでfindしてもオブジェクトはtypeで判別されたオブジェクトが返るので大丈夫
-      @current_user ||= User::Base.find_by(id: user_id)
+      @current_user ||= User.find_by(id: user_id)
     end
   end
 

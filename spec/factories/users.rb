@@ -1,15 +1,15 @@
 FactoryBot.define do
 
-  factory :user_base, class: User::Base do
+  factory :user do
     sequence(:email) { |n| "user#{n}@test.com" }
     password { 'password' }
   end
 
-  factory :recruiter, parent: :user_base, class: User::Recruiter do
+  factory :recruiter, parent: :user, class: Recruiter::User do
     sequence(:name) { |n| "リクルーター#{n}" } 
   end
 
-  factory :seeker, parent: :user_base, class: User::Seeker do
+  factory :seeker, parent: :user, class: Seeker::User do
     sequence(:name) { |n| "シーカー#{n}" }
   end
 

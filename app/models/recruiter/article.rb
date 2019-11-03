@@ -1,5 +1,5 @@
-class Article < ApplicationRecord
-  belongs_to :user, class_name: 'User::Recruiter'
+class Recruiter::Article < ApplicationRecord
+  belongs_to :user
   has_one_attached :image
 
   validates :user_id, presence: true

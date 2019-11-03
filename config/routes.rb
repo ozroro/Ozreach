@@ -1,24 +1,24 @@
 Rails.application.routes.draw do
-  concern :profiles do
-    member do
-      get :profile
+  concern :profile do
+    get 'profile', on: :member
+  end
+
+  namespace :recruiter do
+    resources :users, except: :index, concerns: :profile do
+      get 'articles', on: :member
     end
+    get 'signup' => 'user#new'
   end
 
-
-  namespace :user do
-    resources :seekers, except: :index, concerns: :profiles
-    resources :recruiters, except: :index, concerns: :profiles
-    resource :profile
+  namespace :seeker do
+    resources :users, except: :index, concerns: :profile
+    get 'signup' => 'user#new'
   end
-  get '/seeker_signup' => 'user/seeker#new'
-  get '/recruiter_signup' => 'user/recruiters#new'
-  
 
   resources :articles
-  
-  
-  root 'static_pages#home'
+  resource :profile, only: [:edit, :show, :update]
+    
+  root 'home#top_selector'
   
   get  '/help' => 'static_pages#help'
   get  '/about' => 'static_pages#about'
