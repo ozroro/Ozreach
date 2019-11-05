@@ -7,18 +7,20 @@ Rails.application.routes.draw do
     resources :users, except: :index, concerns: :profile do
       get 'articles', on: :member
     end
-    get 'signup' => 'user#new'
+    get 'signup' => 'users#new'
   end
 
   namespace :seeker do
     resources :users, except: :index, concerns: :profile
-    get 'signup' => 'user#new'
+    get 'signup' => 'users#new'
   end
 
   resources :articles
   resource :profile, only: [:edit, :show, :update]
     
-  root 'home#top_selector'
+  root 'static_pages#top'
+  
+  get '/home' => 'home#home_selector'
   
   get  '/help' => 'static_pages#help'
   get  '/about' => 'static_pages#about'

@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-RSpec.describe User::SeekerProfile, type: :model do
+RSpec.describe Seeker::Profile, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

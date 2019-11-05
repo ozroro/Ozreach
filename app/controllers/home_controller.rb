@@ -1,26 +1,23 @@
 class HomeController < ApplicationController
-  def top_selector
-    if (user = current_user)
-      if user.recruiter?
-        render :recruiter_top
-      elsif user.seeker?
-        render :seeker_top
-      else
-        raise "Unknown User.type:(#{user.type})"
-      end
+  before_action :login_required
+  def home_selector
+    user = current_user
+
+    if user.recruiter?
+      render :recruiter_home
+    elsif user.seeker?
+      render :seeker_home
     else
-      render :guest_top, layout: false
+      raise "Unknown User.type:(#{user.type})"
     end
+
     
   end
 
-  def recruiter_top
+  def recruiter_home
   end
 
-  def seeker_top
+  def seeker_home
   end
 
-  def guest_top
-    layout false
-  end
 end

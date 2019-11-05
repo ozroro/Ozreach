@@ -1,0 +1,225 @@
+nav.navbar.navbar-expand-lg.fixed-top.trans-navigation
+  .container
+    = link_to root_path, class: 'navbar-brand' do
+      = image_tag 'logo_ozreach', class: 'img-fluid.b-logo'
+    button.navbar-toggler[type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation"]
+      span.navbar-toggler-icon
+        i.fa.fa-bars
+    #mainNav.collapse.navbar-collapse.justify-content-end
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link.active.smoth-scroll[href="#banner-area"]
+            | Home 
+            span.sr-only
+              | (current)
+        li.nav-item
+          a.nav-link.smoth-scroll[href="#about"]
+            | About
+
+        li.nav-item
+          a.nav-link.smoth-scroll[href="#blog"]
+            | Blog
+        li.nav-item
+
+
+      = link_to "Login", login_path, class: "btn btn-outline-primary"
+  
+.banner-area.banner-1#banner-area
+  .overlay.gr-overlay
+  .d-table
+    .d-table-cell
+      .container
+        .row
+          .col-lg-8.m-auto.text-center.col-sm-12.col-md-12
+            .banner-content.content-padding
+              h5.subtitle
+                | A creative agency
+              h1.banner-title
+                | We craft seo and digital markting services
+              p
+                | We provide marketing services to startups and small businesses to looking for a partner for their digital media, design-area.We are a a startup company to be commited to work and time management.
+              = link_to seeker_signup_path, class:'btn btn-white btn-circled' do
+                | 求職者として登録
+              = link_to recruiter_signup_path, class:'btn btn-white btn-circled' do              
+                | リクルーターとして登録
+section#about.section-padding
+  .container
+    .row
+      .col-lg-12.col-sm-12.col-md-12
+        .section-heading
+          p.lead
+            | We are creative digital marketing agency with expertise to grow any business that need proper guidance and a committed service.
+    .row
+      .col-lg-5.d-none.d-lg-block.col-sm-12
+        .intro-img
+          = image_tag 'banner/why-choose', class: 'img-fluid'
+      .col-lg-7.col-md-12.col-sm-12
+        .row
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              span
+                | 01.
+              h4
+                | Management
+              p
+                | we founded September with the goal of creating meaningful digital experiences that connect with people.
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              span
+                | 02.
+              h4
+                | Strategy
+              p
+                | We’re full service which means we’ve got you covered on design & content right through to digital. 
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              span
+                | 03.
+              h4
+                | Experience
+              p
+                | You’ll form a lasting relationship with us, collaboration is central to we do.Digital experiences connect people.
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              span
+                | 04.
+              h4
+                | Build
+              p
+                | Technology and design are the core of success for real estate related businesses. Leverage our years.
+        .row
+          .col-lg-12
+            .intro-cta
+              p.lead
+                | Still have any question on mind ? 
+                a.smoth-scroll[href="#contact"]
+                  | Contact us
+
+section#blog.section-padding.bg-main
+  .container
+    .row
+      .col-lg-12.col-sm-12.m-auto
+        .section-heading
+          h4.section-title
+            | Latest Blog news
+          .line
+          p
+            | Our blog journey may come handy to build a community to make more effective success for business. Latest and trend tricks will help a lot 
+    .row
+      .col-lg-4.col-sm-6.col-md-4
+        .blog-block
+          = image_tag 'blog/blog-1.jpg', class: 'img-fluid'
+          .blog-text
+            h6.author-name
+              span
+                | Tips and tricks
+              | john Doe
+            a.h5.my-2.d-inline-block[href="blog-single.html"]
+              |  Best tips to grow your content quality and standard. 
+            p
+              | If you want to grow your content quality and standard you should foolow these tips properly voluptatibus.
+      .col-lg-4.col-sm-6.col-md-4
+        .blog-block
+          = image_tag 'blog/blog-2.jpg', class: 'img-fluid'
+          .blog-text
+            h6.author-name
+              span
+                | Branding
+              | john Doe
+            a.h5.my-2.d-inline-block[href="blog-single.html"]
+              |  Brand your site at top in few minuts. 
+            p
+              | Brand your site at top, boost your audioance corporis facilis animi voluptas alias ex saepe quo voluptatibus.
+      .col-lg-4.col-sm-6.col-md-4
+        .blog-block
+          = image_tag 'blog/blog-3.jpg', class: 'img-fluid'
+          .blog-text
+            h6.author-name
+              span
+                | Marketing
+              | john Doe
+            a.h5.my-2.d-inline-block[href="blog-single.html"]
+              |  How to become a best sale 
+              br
+              | marketer in a year! 
+            p
+              | Becomeing a best sale marketer is not easy but not impossible too.Need to follow up some proper guidance and strategy .
+
+section#footer.section-padding
+  .container
+    .row
+      .col-lg-5.col-sm-8.col-md-8
+        .footer-widget.footer-link
+          h4
+            | We concern about you
+            br
+            |  to grow business rapidly.
+          p
+            | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore ipsam hic non sunt recusandae atque unde saepe nihil earum voluptatibus aliquid optio suscipit nobis quia excepturi vel quod, iure quae.
+      .col-lg-2.col-sm-4.col-md-4
+        .footer-widget.footer-link
+          h4
+            | About
+          ul
+            li
+              a[href="#"]
+                | About
+            li
+              a[href="#"]
+                | Service
+            li
+              a[href="#"]
+                | Pricing
+            li
+              a[href="#"]
+                | Team
+            li
+              a[href="#"]
+                | Testimonials
+            li
+              a[href="#"]
+                | Blog
+      .col-lg-2.col-sm-6.col-md-6
+        .footer-widget.footer-link
+          h4
+            | Quick Links
+          ul
+            li
+              a[href="#"]
+                | How it Works
+            li
+              a[href="#"]
+                | Support
+            li
+              a[href="#"]
+                | Privacy Policy
+            li
+              a[href="#"]
+                | Report Bug
+            li
+              a[href="#"]
+                | License
+            li
+              a[href="#"]
+                | Terms & Condition
+      .col-lg-3.col-sm-6.col-md-6
+        .footer-widget.footer-text
+          h4
+            | Our location
+          p.mail
+            span
+              | Mail:
+            |  promdise@gmail.com
+          p
+            span
+              | Phone :
+            | +202-277-3894
+          p
+            span
+              | Location:
+            |  455 West Orchard Street Kings Mountain, NC 28086,NOC building
+    .row
+      .col-lg-12.text-center
+        .footer-copy
+          |  © 2018 Promodise inc. All Rights Reserved. 
+

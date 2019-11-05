@@ -2,7 +2,7 @@ require 'rails_helper'
 
 
 # 練習のためにずらずら書いたけど、この程度の単純なバリデーションならそもそも書く必要ないかも
-RSpec.describe User::Base, type: :model do
+RSpec.describe User, type: :model do
   before do
     @user = FactoryBot.build(:recruiter)
   end
@@ -70,7 +70,7 @@ RSpec.describe User::Base, type: :model do
     end
 
 
-    context 'User::Recruiterの場合' do
+    context 'Recruiterの場合' do
       it 'recruiter?でtrueを返す' do
         expect(@recruiter.recruiter?).to be true
       end
@@ -79,7 +79,7 @@ RSpec.describe User::Base, type: :model do
       end
     end
 
-    context 'User::Seekerの場合' do
+    context 'Seekerの場合' do
 
       it 'recruiter?でfalseを返す' do
         expect(@seeker.recruiter?).to be false

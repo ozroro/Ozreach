@@ -1,4 +1,4 @@
-class Seeker::UsersController < UserController
+class Seeker::UsersController < UsersController
   def create
     @user = Seeker::User.new(user_params :seeker)
     if @user.save
@@ -17,7 +17,7 @@ class Seeker::UsersController < UserController
   end
 
   def new
-    @user = User::Seeker.new
+    @user = Seeker::User.new
   end
 
   def edit
@@ -32,4 +32,5 @@ class Seeker::UsersController < UserController
   private
   def create_profile(user)
     user.create_profile(content: '設定されていません')
+  end
 end
