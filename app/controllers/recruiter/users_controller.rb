@@ -34,6 +34,10 @@ class Recruiter::UsersController < UsersController
 
   end
 
+  def articles
+    
+  end
+
   private
   def create_profile(user)
     user.create_profile(corporate_name: '未設定', content: '設定されていません')

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     resources :users, except: :index, concerns: :profile do
       get 'articles', on: :member
     end
+    resources :articles
     get 'signup' => 'users#new'
   end
 

@@ -18,6 +18,7 @@ class HomeController < ApplicationController
   end
 
   def seeker_home
+    @articles = Recruiter::Article.all
   end
 
 end

@@ -1,4 +1,4 @@
-class ArticlesController < ApplicationController
+class Recruiter::ArticlesController < ApplicationController
   before_action :login_required
   before_action :only_recruiter, except: [:index, :show]
 
