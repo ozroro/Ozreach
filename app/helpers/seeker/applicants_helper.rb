@@ -1,0 +1,2 @@
+module Seeker::ApplicantsHelper
+end

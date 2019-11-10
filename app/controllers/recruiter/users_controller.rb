@@ -35,7 +35,12 @@ class Recruiter::UsersController < UsersController
   end
 
   def articles
-    
+    @user = User.find(params[:id])
+    if @user.recruiter?
+      @articles = @user.articles
+    else
+      redirect_to root_url
+    end
   end
 
   private

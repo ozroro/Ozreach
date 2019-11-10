@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   concern :profile do
     get 'profile', on: :member
   end
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
   namespace :seeker do
     resources :users, except: :index, concerns: :profile
     get 'signup' => 'users#new'
+    resources :applicants, only: [:index, :new, :create, :destroy]
+
   end
 
   resources :articles

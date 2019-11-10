@@ -68,3 +68,6 @@ gem 'html2slim'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'faker'
+
+gem 'font-awesome-sass', '~> 5.11.2'
+gem 'jquery-easing-rails'

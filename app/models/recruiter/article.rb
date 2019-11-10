@@ -1,6 +1,15 @@
 class Recruiter::Article < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  
+  has_many :applicants,
+            class_name: '::Seeker::Applicant',
+            foreign_key: 'recruiter_article_id'
+
+  has_many :seeker_users,
+            through: :applicants,
+            class_name: '::User',
+            source: 'user'
 
   validates :user_id, presence: true
   validates :title, presence: true, length: {maximum: 140}

@@ -16,60 +16,10 @@
  
 // Custom bootstrap variables must be set or imported *before* bootstrap.
 @import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+
 @import "mixins/**/*";
 
-/*
- * Base structure
- */
-html {
-  height: 100%;
 
-}
-
-body {
-  height: 100%;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.cover-container {
-  max-width: 42em;
-}
-
-
-/*
- * Header
- */
-.masthead {
-  margin-bottom: 2rem;
-}
-
-.masthead-brand {
-  margin-bottom: 0;
-}
-
-.nav-masthead {
-  .nav-item {
-    .nav-link {
-      padding: .25rem 0;
-      font-weight: 700;
-      border-bottom: .25rem solid transparent;
-    }
-    + .nav-item {
-      margin-left: 1rem;
-    }
-  }
-
-
-
-}
-
-@media (min-width: 48em) {
-  .masthead-brand {
-    float: left;
-  }
-
-  .nav-masthead {
-    float: right;
-  }
-}
