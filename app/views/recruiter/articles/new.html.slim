@@ -1,3 +1,4 @@
-h1 募集記事を作成する
-
-= render partial: 'form', locals: { article: @article }
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    | 記事の作成
+  = render 'form_card' , article: @article

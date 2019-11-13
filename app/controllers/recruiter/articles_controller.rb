@@ -3,11 +3,11 @@ class Recruiter::ArticlesController < ApplicationController
   before_action :only_recruiter, except: [:index, :show]
 
   def index
-    @articles = Article.all.recent
+    @articles = Recruiter::Article.all.recent
   end
 
   def show
-    @article = Article.find(params[:id])
+    @article = Recruiter::Article.find(params[:id])
   end
 
   def new
@@ -18,12 +18,17 @@ class Recruiter::ArticlesController < ApplicationController
     @article = current_user.articles.build(article_params)
 
     if @article.save
-      redirect_to articles_path
+      redirect_to home_path
     else
-      render :new
+      render :fail
     end
 
   end
+
+  def fail
+    
+  end
+
 
   def edit
   end
@@ -37,7 +42,7 @@ class Recruiter::ArticlesController < ApplicationController
   private
   
     def article_params
-      params.require(:article).permit(:title, :content, :image)
+      params.require(:recruiter_article).permit(:title, :content, :image)
     end
 
 end

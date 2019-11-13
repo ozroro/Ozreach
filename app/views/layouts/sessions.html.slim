@@ -1,6 +1,3 @@
-/ 現在のユーザーのタイプでフォルダ分けしたサイドバーなどを表示する
-- user_type = current_user.type_text
-
 doctype html
 html
   head
@@ -17,16 +14,5 @@ html
     meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
     meta[name="description" content=""]
     meta[name="author" content=""]
-
- 
-
-  body#page-top
-    #wrapper
-      = render "layouts/#{user_type}/sidebar" 
-      #content-wrapper.d-flex.flex-column
-        #content
-          = render "layouts/#{user_type}/topbar"     
-          = yield
-        = render "layouts/#{user_type}/footer"
-    = render "layouts/#{user_type}/modal"
-
+  body.bg-gradient-primary
+    = yield

@@ -1,0 +1,17 @@
+.card.shadow.mb-4
+  .card-header
+    .errors-field
+  .card-body
+    .container-fluid
+      = form_with model: article do |f|
+        .row.border.py-3
+          = f.label :title, class: " col-xl-3 col-lg-12 col-md-12 py-1"
+          = f.text_field :title, class: "col-xl-9 col-lg-12 col-md-12 py-1 pl-4 form-control"
+        .row.border.py-3
+          = f.label :content, class: " col-xl-3 col-lg-12 col-md-12 py-1"
+          = f.text_area :content, class: "col-xl-9 col-lg-12 col-md-12 py-1 pl-4 form-control", rows: 10
+        .row.py-3
+          = f.label :image
+          = f.file_field :image, class: 'form-control-file'
+        .row.py-3
+          = f.submit class: "btn btn-primary"

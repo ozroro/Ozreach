@@ -1,11 +1,17 @@
-article.show id="article-#{@article.id}"
-  .h4.title
-    = @article.title
-  p.recruiter
-    = link_to @article.user.name, profile_user_recruiter_path(@article.user) 
-  = image_tag @article.image if @article.image.attached?
-  p.content
-    = @article.content
-  .article-footer
-    p
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    | 記事詳細
+  .card.shadow.mb-4.show id="article-#{@article.id}"
+    .card-header
+      h6.m-0.font-weight-bold.text-primary
+        = link_to profile_recruiter_user_path(@article.user)
+          = @article.user.profile.corporate_name
+      = image_tag @article.image, class: "bd-placeholder-img card-img-top" if @article.image.attached?
+    .card-body
+      h5.card-title
+        = @article.title
+      p.card-text
+        = simple_format(h(@article.content), {}, sanitize: false)
+
+    .card-footer.text-muted.text-right
       = @article.created_at

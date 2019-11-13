@@ -1,12 +1,14 @@
-article.overview id="article-#{article.id}"
-  = link_to article do
-    .h4.title
+.card.shadow.mb-4.overview id="article-#{article.id}"
+  .card-header
+    h6.m-0.font-weight-bold.text-primary
+      = article.user.profile.corporate_name
+  .card-body
+    h5.card-title
       = article.title
-    p.recruiter
-      = article.user.name
-    p.content
+    p.card-text
       = article.content
-    .article-footer
-      p
-        = article.created_at
-      
+    = link_to recruiter_article_path(article), class: "btn btn-secondary stretched-link"
+      | 記事を読む
+  .card-footer.text-muted.text-right
+    = article.created_at
+

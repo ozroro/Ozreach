@@ -1,0 +1,29 @@
+.card.shadow.mb-4
+  .card-header.py-3
+    - if user == current_user
+      = link_to edit_profile_path, class: "text-right"
+        h6.m-0.font-weight-bold.text-primary.text-right
+          | edit
+  .card-body
+    .container-fluid
+      .row.border.py-3
+        .col-xl-3.col-lg-12.col-md-12.py-1
+          | User Name
+        .col-xl-9.col-lg-12.col-md-12.py-1.pl-4
+          = user.name
+      .row.border.py-3
+        .col-xl-3.col-lg-12.col-md-12.py-1
+          | Corporate
+        .col-xl-9.col-lg-12.col-md-12.py-1.pl-4
+          = user.profile.corporate_name
+      .row.border.py-3
+        .col-xl-3.col-lg-12.col-md-12.py-1
+          | Profile
+        .col-xl-9.col-lg-12.col-md-12.py-1.pl-4
+          = simple_format(h(user.profile.content), {}, sanitize: false)
+
+        
+        
+
+
+    

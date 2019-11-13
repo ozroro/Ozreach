@@ -27,6 +27,11 @@ class User < ApplicationRecord
     self.type == 'Seeker::User'
   end
 
+  def type_text
+    return 'recruiter' if self.recruiter?
+    return 'seeker' if self.seeker?
+  end
+
   
   private
 

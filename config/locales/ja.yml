@@ -7,6 +7,27 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      user: ユーザー
+      recruiter/user: リクルーター
+      recruiter/article: 記事
+      recruiter/profile: プロフィール
+      
+      seeker/user: 求職者
+      applicant: 応募
+      profile: プロフィール
+      
+    attributes:
+      recruiter/article:
+        title: タイトル
+        content: コンテント
+        image: 画像
+  # 全モデル共通の要素名
+  attributes:
+    created_at: 作成日時
+    updated_at: 更新日時
+
+
   date:
     abbr_day_names:
     - 日

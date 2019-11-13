@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   end
 
-  resources :articles
+
   resource :profile, only: [:edit, :show, :update]
     
   root 'static_pages#top'
