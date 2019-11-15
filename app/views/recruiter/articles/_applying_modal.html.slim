@@ -1,0 +1,18 @@
+#applyingModal.modal.fade[tabindex="-1" role="dialog" aria-labelledby="applyingModalLabel" aria-hidden="true"]
+  .modal-dialog[role="document"]
+    .modal-content
+      .modal-header
+        h5#applyingModalLabel.modal-title
+          | 確認
+        button.close[type="button" data-dismiss="modal" aria-label="Close"]
+          span[aria-hidden="true"]
+            | ×
+      .modal-body
+        = "「#{article.title}」に応募しますか？"
+      .modal-footer
+        button.btn.btn-secondary[type="button" data-dismiss="modal"]
+          | Cancel
+        = form_with model:article
+
+        = link_to applying_path(article), method: :post, class: "btn btn-primary" do
+          | 応募する

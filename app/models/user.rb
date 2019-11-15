@@ -32,6 +32,10 @@ class User < ApplicationRecord
     return 'seeker' if self.seeker?
   end
 
+  def unsubscribed_seeker?(article)
+    return seeker? && !self.recruiter_articles.exists?(article.id)
+  end
+
   
   private
 

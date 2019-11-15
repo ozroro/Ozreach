@@ -12,16 +12,17 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
       i.fas.fa-fw.fa-tachometer-alt
       span
         | Home
-  li.nav-item
-    = link_to new_recruiter_article_path, class: 'nav-link'
-      i.fas.fa-fw.fa-tachometer-alt
-      span
-        | 記事作成
+  hr.sidebar-divider.my-0
   li.nav-item
     = link_to recruiter_articles_path, class: 'nav-link'
       i.fas.fa-fw.fa-tachometer-alt
       span
-        | 記事一覧
+        | 募集を探す
+  li.nav-item
+    = link_to seeker_applicants_path, class: 'nav-link'
+      i.fas.fa-fw.fa-tachometer-alt
+      span
+        | 応募履歴
 
   hr.sidebar-divider
   .sidebar-heading
@@ -56,6 +57,7 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
           | Animations
         a.collapse-item[href="utilities-other.html"]
           | Other
+
   hr.sidebar-divider.d-none.d-md-block
   .text-center.d-none.d-md-inline
     button#sidebarToggle.rounded-circle.border-0

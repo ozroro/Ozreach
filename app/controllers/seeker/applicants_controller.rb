@@ -6,20 +6,17 @@ class Seeker::ApplicantsController < ApplicationController
     @applicants = current_user.applicants
   end
 
-  def new
-    @applicant = Seeker::Applicant.build(applicant_params)
-  end
 
   def create
-    @applicant = Seeker::Applicant.build(applicant_params)
+    @applicant = current_user.applicants.build(recruiter_article_id: params[:article_id])
 
     if (@applicant.user == current_user) && @applicant.save
       # ToDo: 
       flash[:notice] = "応募しました。"
-      render :index
+      redirect_to seeker_applicants_path
     else
       # ToDo: エラー表示
-      render :index
+      redirect_to root_path
     end
 
   end
@@ -37,9 +34,6 @@ class Seeker::ApplicantsController < ApplicationController
     end
   end
 
-  private
   
-    def applicant_params
-      params.require(:applicant).permit(:user, :recruiter_article_id)
-    end
+
 end

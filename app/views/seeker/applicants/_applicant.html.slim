@@ -1,0 +1,8 @@
+tr
+  th[scope="row"] = applicant_counter
+  td = applicant.corporate_name
+  td = applicant.title
+  td = applicant.created_at
+  td 
+    = link_to '詳細', recruiter_article_path(applicant.recruiter_article), class: "btn btn-info" 
+    = link_to '取消', seeker_applicant_path(applicant), method: :delete, data: {confirm: "取り消しますか？"}, class: "btn btn-danger ml-2"

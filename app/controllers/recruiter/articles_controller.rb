@@ -39,6 +39,10 @@ class Recruiter::ArticlesController < ApplicationController
   def destroy
   end
 
+  def applicant
+    @article = Recruiter::Article.find(params[:id])
+  end
+
   private
   
     def article_params

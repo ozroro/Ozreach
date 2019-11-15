@@ -1,2 +1,24 @@
-h1 Seeker::Applicants#index
-p Find me in app/views/seeker/applicants/index.html.slim
+.container-fluid
+  .d-sm-flex.align-items-center.justify-content-between.mb-4
+    h1.h3.mb-0.text-gray-800
+      | 応募履歴
+
+  .card.shadow.mb-4
+   .card-body
+    .table-responsive
+      table.table.table-hover[width="100%"]
+        thead
+          tr
+            th[scope="col"] #
+            th[scope="col"] 企業/団体 名
+            th[scope="col"] 募集記事タイトル
+            th[scope="col"] 応募日時
+            th[scope="col"] 
+        tbody
+          = render partial: 'applicant', collection: current_user.applicants
+
+
+
+
+
+    

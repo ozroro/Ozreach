@@ -3,15 +3,24 @@
     | 記事詳細
   .card.shadow.mb-4.show id="article-#{@article.id}"
     .card-header
-      h6.m-0.font-weight-bold.text-primary
+      h4.m-0.font-weight-bold.text-primary
         = link_to profile_recruiter_user_path(@article.user)
           = @article.user.profile.corporate_name
-      = image_tag @article.image, class: "bd-placeholder-img card-img-top" if @article.image.attached?
     .card-body
-      h5.card-title
+      h4.card-title.text-center
         = @article.title
-      p.card-text
-        = simple_format(h(@article.content), {}, sanitize: false)
-
+      .row
+        .col-xl-4.col-lg-4.col-md-12
+          = image_tag @article.image.variant(resize:'300x300').processed, class: "img-fluid" if @article.image.attached?
+        .col-xl-8.col-lg-8.col-md-12
+          p.card-text
+            = simple_format(h(@article.content), {}, sanitize: false)
+      - if current_user.unsubscribed_seeker?(@article)
+        .row.py-3
+          a.applicant_button.btn.btn-primary[href="#" data-toggle="modal" data-target="#applyingModal"]
+            | 応募する
     .card-footer.text-muted.text-right
       = @article.created_at
+
+
+= render partial: 'applying_modal', locals: {article: @article} if current_user.unsubscribed_seeker?(@article)
