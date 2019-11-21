@@ -1,0 +1,31 @@
+.card.shadow.mb-4
+  - if profile.errors.present?
+    .card-header.py-3
+      ul#error_explanation
+        - profile.errors.full_messages.each do |message|
+          li= message
+
+  .card-body
+    .container-fluid
+      = form_with model: profile, local: true, url: profile_path do |f|
+        .row.border.py-3
+          .col-xl-3.col-lg-12.col-md-12.py-1
+            | ユーザー名
+          .col-xl-9.col-lg-12.col-md-12.py-1.pl-4
+            = profile.user.name
+        .row.border.py-3
+          = f.label :corporate_name, class: " col-xl-3 col-lg-12 col-md-12 py-1"
+            | 企業・団体名
+          = f.text_field :corporate_name, class: "col-xl-9 col-lg-12 col-md-12 py-1 pl-4 form-control"
+        .row.border.py-3
+          = f.label :corporate_name, class: " col-xl-3 col-lg-12 col-md-12 py-1"
+            | プロフィール画像(320x100 px) 
+          .col-xl-9.col-lg-12.col-md-12.py-1.pl-4
+            = image_tag profile.thumbnail if profile.image.attached?
+            = f.file_field :image, class: "form-control-fiel"
+        .row.border.py-3
+          = f.label :corporate_name, class: " col-xl-3 col-lg-12 col-md-12 py-1"
+            | プロフィール
+          = f.text_area :content, class: "col-xl-9 col-lg-12 col-md-12 py-1 pl-4 form-control", rows: 10
+        .row.py-3
+          = f.submit class: "btn btn-primary"

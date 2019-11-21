@@ -46,4 +46,4 @@ document.addEventListener('turbolinks:load', function() {
     e.preventDefault();
   });
 
-})(jQuery); // End of use strict
+}) // End of use strict

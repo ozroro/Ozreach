@@ -32,6 +32,7 @@ class Recruiter::UsersController < UsersController
 
   def profile
     @user = User.find(params[:id])
+    @profile = @user.profile
   end
 
   def articles

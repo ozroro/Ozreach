@@ -47,7 +47,7 @@ class ProfilesController < ApplicationController
 
   def profile_params
     user = current_user
-    return params.require(:recruiter_profile).permit(:corporate_name, :content) if user.recruiter?
-    return params.require(:seeker_profile).permit(:content) if user.seeker?
+    return params.require(:recruiter_profile).permit(:corporate_name, :content, :image) if user.recruiter?
+    return params.require(:seeker_profile).permit(:content, :image) if user.seeker?
   end
 end

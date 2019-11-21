@@ -25,7 +25,7 @@ html
       = render "layouts/#{user_type}/sidebar" 
       #content-wrapper.d-flex.flex-column
         #content
-          = render "layouts/#{user_type}/topbar"     
+          = render partial: "layouts/#{user_type}/topbar", locals: {user: current_user}  
           = yield
         = render "layouts/#{user_type}/footer"
     = render "layouts/#{user_type}/modal"

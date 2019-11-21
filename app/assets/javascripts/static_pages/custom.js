@@ -57,4 +57,4 @@ document.addEventListener('turbolinks:load', function () {
 
 
 
-})(window.jQuery);
+})
