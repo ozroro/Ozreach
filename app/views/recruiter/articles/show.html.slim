@@ -7,7 +7,7 @@
         = link_to profile_recruiter_user_path(@article.user)
           = image_tag @article.user.profile.thumbnail if @article.user.profile.image.attached?
           = @article.user.profile.corporate_name
-          
+      = link_to '編集する',  edit_recruiter_article_path(@article) if @article.user == current_user
     .card-body
       h4.card-title.text-center
         = @article.title

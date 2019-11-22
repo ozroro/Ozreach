@@ -1,2 +1,4 @@
-h1 Articles#edit
-p Find me in app/views/articles/edit.html.slim
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    | 記事編集
+  = render partial: 'form_card', locals: {article: @article}

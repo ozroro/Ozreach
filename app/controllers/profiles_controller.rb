@@ -1,6 +1,7 @@
 #ログインしている自分のプロファイルの表示、編集
 class ProfilesController < ApplicationController
  before_action :profile_is_present
+ 
   def show
     @user = current_user
     @profile = @user.profile

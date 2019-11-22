@@ -1,6 +1,7 @@
 class Recruiter::ArticlesController < ApplicationController
   before_action :login_required
   before_action :only_recruiter, except: [:index, :show]
+  # before_action :collect_user, only: [:edit, :update, :destroy]
 
   def index
     @articles = Recruiter::Article.all.recent
@@ -31,9 +32,20 @@ class Recruiter::ArticlesController < ApplicationController
 
 
   def edit
+    @article = Recruiter::Article.find(params[:id])
   end
 
   def update
+
+    @article = Recruiter::Article.find(params[:id])
+
+    if @article.update(article_params)
+      redirect_to home_path
+    else
+      render :fail
+    end
+
+    
   end
 
   def destroy
