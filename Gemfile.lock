@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 8b9302558088c6a1903c7af4f8417a136a96356b
+  branch: master
+  specs:
+    faker (2.7.0)
+      i18n (>= 1.6, < 1.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -88,8 +96,6 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
-    faker (2.6.0)
-      i18n (>= 1.6, < 1.8)
     ffi (1.11.1)
     font-awesome-sass (5.11.2)
       sassc (>= 1.11)
@@ -261,7 +267,7 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   factory_bot_rails (~> 4.11)
-  faker
+  faker!
   font-awesome-sass (~> 5.11.2)
   html2slim
   jbuilder (~> 2.5)

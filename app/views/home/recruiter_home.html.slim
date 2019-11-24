@@ -1,52 +1,7 @@
-.container-fluid
-  .d-sm-flex.align-items-center.justify-content-between.mb-4
-    h1.h3.mb-0.text-gray-800
-      | Cards
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    | ホーム
 
-  .row
-    .col-lg-6
-      .card.mb-4
-        .card-header
-          |  Default Card Example 
-        .card-body
-          |  This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example. 
-      .card.shadow.mb-4
-        .card-header.py-3
-          h6.m-0.font-weight-bold.text-primary
-            | Basic Card Example
-        .card-body
-          |  The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS! 
-    .col-lg-6
-      .card.shadow.mb-4
-        .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
-          h6.m-0.font-weight-bold.text-primary
-            | Dropdown Card Example
-          .dropdown.no-arrow
-            a#dropdownMenuLink.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-              i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
-            .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in[aria-labelledby="dropdownMenuLink"]
-              .dropdown-header
-                | Dropdown Header:
-              a.dropdown-item[href="#"]
-                | Action
-              a.dropdown-item[href="#"]
-                | Another action
-              .dropdown-divider
-              a.dropdown-item[href="#"]
-                | Something else here
-        .card-body
-          |  Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu. 
-      .card.shadow.mb-4
-        a.d-block.card-header.py-3[href="#collapseCardExample" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample"]
-          h6.m-0.font-weight-bold.text-primary
-            | Collapsable Card Example
-        #collapseCardExample.collapse.show
-          .card-body
-            |  This is a collapsable card example using Bootstrap's built in collapse functionality. 
-            strong
-              | Click on the card header
-            |  to see the card body collapse and expand! 
-  
-  
+  = render partial: "shared/article", collection: @articles
 
 

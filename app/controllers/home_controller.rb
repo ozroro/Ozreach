@@ -4,6 +4,7 @@ class HomeController < ApplicationController
     user = current_user
 
     if user.recruiter?
+      @articles = user.articles
       render :recruiter_home
     elsif user.seeker?
       render :seeker_home
@@ -18,7 +19,6 @@ class HomeController < ApplicationController
   end
 
   def seeker_home
-    @articles = Recruiter::Article.all
   end
 
 end
