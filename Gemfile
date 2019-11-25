@@ -71,3 +71,4 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 
 gem 'font-awesome-sass', '~> 5.11.2'
 gem 'jquery-easing-rails'
+gem 'pagy', '~> 3.5'

@@ -1,10 +1,14 @@
 class Recruiter::ArticlesController < ApplicationController
+  include Pagy::Backend
+
   before_action :login_required
   before_action :only_recruiter, except: [:index, :show]
   # before_action :collect_user, only: [:edit, :update, :destroy]
 
   def index
     @articles = Recruiter::Article.all.recent
+
+    @pagy, @articles = pagy(@articles)
   end
 
   def show

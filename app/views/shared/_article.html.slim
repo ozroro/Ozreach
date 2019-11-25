@@ -4,9 +4,9 @@
         = article.user.profile.corporate_name
     .card-body
       .row.no-grutters
-        .col-md-3
-          = image_tag article.image.variant(resize:'200x200').processed, class: "img-fluid" if article.image.attached?
-        .col-md-9
+        .col-md-2
+          = image_tag article.image.variant(resize:'150x150').processed, class: "img-fluid" if article.image.attached?
+        .col-md
           h5.card-title
             = article.title
           p.card-text

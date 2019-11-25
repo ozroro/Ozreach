@@ -3,3 +3,5 @@
     | 募集記事一覧
 
   = render partial: "shared/article", collection: @articles
+  .d-flex.justify-content-center
+    == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
