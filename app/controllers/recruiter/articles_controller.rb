@@ -6,7 +6,8 @@ class Recruiter::ArticlesController < ApplicationController
   # before_action :collect_user, only: [:edit, :update, :destroy]
 
   def index
-    @articles = Recruiter::Article.all.recent
+    @q = Recruiter::Article.all.ransack(search_params)
+    @articles = @q.result.includes(user: :profile, image_attachment: :blob ).recent
 
     @pagy, @articles = pagy(@articles)
   end
@@ -60,9 +61,18 @@ class Recruiter::ArticlesController < ApplicationController
   end
 
   private
-  
-    def article_params
-      params.require(:recruiter_article).permit(:title, :content, :image)
-    end
+    
+  def article_params
+    params.require(:recruiter_article).permit(:title, :content, :image)
+  end
 
+  def search_params
+    search_conditions = %i(
+      title_or_content_or_user_profile_corporate_name_cont
+      user_profile_corporate_name_cont title_cont content_cont
+      reated_at_gteq created_at_lteq
+    )
+    params.fetch(:q, {}).permit(search_conditions)
+  end
+    
 end

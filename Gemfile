@@ -50,6 +50,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
+  gem 'bullet'
 end
 
 group :test do
@@ -72,3 +73,4 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'font-awesome-sass', '~> 5.11.2'
 gem 'jquery-easing-rails'
 gem 'pagy', '~> 3.5'
+gem 'ransack'

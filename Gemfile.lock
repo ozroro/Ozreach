@@ -66,6 +66,9 @@ GEM
       popper_js (>= 1.14.3, < 2)
       sassc-rails (>= 2.0.0)
     builder (3.2.3)
+    bullet (6.0.2)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.0.1)
     capybara (3.29.0)
       addressable
@@ -137,6 +140,8 @@ GEM
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
     pagy (3.7.0)
+    polyamorous (2.3.0)
+      activerecord (>= 5.0)
     popper_js (1.14.5)
     public_suffix (4.0.1)
     puma (3.12.1)
@@ -168,6 +173,12 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rake (13.0.0)
+    ransack (2.3.0)
+      actionpack (>= 5.0)
+      activerecord (>= 5.0)
+      activesupport (>= 5.0)
+      i18n
+      polyamorous (= 2.3.0)
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
@@ -245,6 +256,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.13.0)
     web-console (3.7.0)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -263,6 +275,7 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.1.0)
   bootstrap
+  bullet
   byebug
   capybara (>= 2.15)
   chromedriver-helper
@@ -279,6 +292,7 @@ DEPENDENCIES
   pagy (~> 3.5)
   puma (~> 3.11)
   rails (~> 5.2.3)
+  ransack
   rspec-rails (~> 3.7)
   sass-rails (~> 5.0)
   selenium-webdriver

@@ -18,7 +18,7 @@ def random_content
 end
 
 50.times do |n| 
-  recruiter = Recruiter::User.create!(name: Faker::Name.first_name, email: "recruiter#{n}@test.com", password: 'password', password_confirmation: 'password')
+  recruiter = Recruiter::User.create!(name: Faker::Name.name, email: "recruiter#{n}@test.com", password: 'password', password_confirmation: 'password')
   recruiter.create_profile!(corporate_name: Faker::Company.name, content: random_content)
   article1 = recruiter.articles.create!(title: Faker::Company.catch_phrase, content: random_content)
   article2 = recruiter.articles.create!(title: Faker::Company.catch_phrase, content: random_content)
