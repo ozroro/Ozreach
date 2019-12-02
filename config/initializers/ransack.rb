@@ -5,5 +5,5 @@ Ransack.configure do |config|
 
   config.add_predicate 'cont_terms',
                        arel_predicate: 'matches_all',
-                       formatter: proc { |v| v.split.map { |t| "%#{t}%" } }
+                       formatter: proc { |v| v.split(/[[:blank:]]+/).map { |t| "%#{t}%" } }
 end

@@ -1,6 +1,10 @@
 class Recruiter::Article < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+
+
+  ransack_alias :corporate, :user_profile_corporate_name
+  ransack_alias :all_atr, :title_or_content_or_user_profile_corporate_name
   
   has_many :applicants,
             class_name: '::Seeker::Applicant',

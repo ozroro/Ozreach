@@ -68,9 +68,9 @@ class Recruiter::ArticlesController < ApplicationController
 
   def search_params
     search_conditions = %i(
-      title_or_content_or_user_profile_corporate_name_cont_terms
-      user_profile_corporate_name_cont_terms title_cont_terms content_cont_terms
-      created_at_gteq created_at_lteq
+      all_atr_cont_terms
+      corporate_cont_terms title_cont_terms content_cont_terms
+      created_at_gteq created_at_lteq_end_of_day
     )
     params.fetch(:q, {}).permit(search_conditions)
   end
