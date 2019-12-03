@@ -1,0 +1,15 @@
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    | 応募者一覧
+
+  .card.shadow.mb-4
+    .card-body
+      table.table
+        thead
+          tr
+            th[scope="col"] = sort_link(@q, :id)
+            th[scope="col"] = sort_link(@q, :user_name)
+            th[scope="col"] = sort_link(@q, :recruiter_article_title, "応募先の記事")
+            th[scope="col"] = sort_link(@q, :created_at, "応募日")
+        tbody
+          = render partial: "applicant", collection: @applicants

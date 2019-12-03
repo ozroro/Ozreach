@@ -22,10 +22,15 @@ ja:
         title: タイトル
         content: コンテント
         image: 画像
+      recruiter/user:
+        name: ユーザー名
+      seeker/user:
+        name: ユーザー名
   # 全モデル共通の要素名
   attributes:
     created_at: 作成日時
     updated_at: 更新日時
+    id: ID
 
 
   date:

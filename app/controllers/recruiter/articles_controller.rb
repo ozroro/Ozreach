@@ -3,7 +3,7 @@ class Recruiter::ArticlesController < ApplicationController
 
   before_action :login_required
   before_action :only_recruiter, except: [:index, :show]
-  # before_action :collect_user, only: [:edit, :update, :destroy]
+  before_action :collect_user, only: [:edit, :update, :destroy]
 
   def index
     @q = Recruiter::Article.all.ransack(search_params)
@@ -56,9 +56,7 @@ class Recruiter::ArticlesController < ApplicationController
   def destroy
   end
 
-  def applicant
-    @article = Recruiter::Article.find(params[:id])
-  end
+
 
   private
     
@@ -74,5 +72,7 @@ class Recruiter::ArticlesController < ApplicationController
     )
     params.fetch(:q, {}).permit(search_conditions)
   end
+
+
     
 end

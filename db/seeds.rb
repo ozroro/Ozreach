@@ -29,7 +29,7 @@ end
   article3.update!(created_at: 3.days.ago)
 
 
-  seeker = Seeker::User.create!(name: Faker::Name.first_name, email: "seeker#{n}@test.com", password: 'password', password_confirmation: 'password')
+  seeker = Seeker::User.create!(name: Faker::Name.name, email: "seeker#{n}@test.com", password: 'password', password_confirmation: 'password')
   seeker.create_profile!(content: random_content)
   seeker.applicants.create!(recruiter_article_id: article1.id )
 

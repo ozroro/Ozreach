@@ -27,4 +27,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_url unless current_user.seeker?
   end
 
+  def collect_user
+    redirect_to root_url unless current_user.id == params[:id]
+  end
+
 end

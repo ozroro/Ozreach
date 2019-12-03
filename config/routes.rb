@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   concern :profile do
     get 'profile', on: :member
   end
@@ -8,8 +9,8 @@ Rails.application.routes.draw do
     resources :users, except: :index, concerns: :profile do
       get 'articles', on: :member
     end
-    resources :articles do
-    end
+    resources :articles
+    resources :applicants, only: [:index, :destory]
     get 'signup' => 'users#new'
   end
 
