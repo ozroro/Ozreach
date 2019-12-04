@@ -13,3 +13,7 @@
             th[scope="col"] = sort_link(@q, :created_at, "応募日")
         tbody
           = render partial: "applicant", collection: @applicants
+
+
+  .d-flex.justify-content-center
+    == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

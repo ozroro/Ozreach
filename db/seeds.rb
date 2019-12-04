@@ -5,8 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+record_count = 50
 
 t = Time.current
+
 def random_content
   a = ""
   rand(10..20).times do |n|
@@ -17,7 +19,7 @@ def random_content
   return a
 end
 
-50.times do |n| 
+record_count.times do |n| 
   recruiter = Recruiter::User.create!(name: Faker::Name.name, email: "recruiter#{n}@test.com", password: 'password', password_confirmation: 'password')
   recruiter.create_profile!(corporate_name: Faker::Company.name, content: random_content)
   article1 = recruiter.articles.create!(title: Faker::Company.catch_phrase, content: random_content)
@@ -29,9 +31,12 @@ end
   article3.update!(created_at: 3.days.ago)
 
 
+
+end
+
+record_count.times do |n|
   seeker = Seeker::User.create!(name: Faker::Name.name, email: "seeker#{n}@test.com", password: 'password', password_confirmation: 'password')
   seeker.create_profile!(content: random_content)
-  seeker.applicants.create!(recruiter_article_id: article1.id )
-
+  (1..Recruiter::Article.count).to_a.sample(30).each { |n| seeker.applicants.create!(recruiter_article_id: n) }
 end
 
