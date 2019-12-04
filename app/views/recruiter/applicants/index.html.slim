@@ -8,6 +8,7 @@
         thead
           tr
             th[scope="col"] = sort_link(@q, :id)
+            th[scope="col"] = sort_link(@q, :user_id, "ユーザーID")
             th[scope="col"] = sort_link(@q, :user_name)
             th[scope="col"] = sort_link(@q, :recruiter_article_title, "応募先の記事")
             th[scope="col"] = sort_link(@q, :created_at, "応募日")
