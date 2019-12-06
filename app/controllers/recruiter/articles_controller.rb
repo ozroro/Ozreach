@@ -2,19 +2,9 @@ class Recruiter::ArticlesController < ApplicationController
   include Pagy::Backend
 
   before_action :login_required
-  before_action :only_recruiter, except: [:index, :show]
+  before_action :only_recruiter
   before_action :collect_user, only: [:edit, :update, :destroy]
 
-  def index
-    @q = Recruiter::Article.all.ransack(search_params)
-    @articles = @q.result.includes(user: :profile, image_attachment: :blob ).recent
-
-    @pagy, @articles = pagy(@articles)
-  end
-
-  def show
-    @article = Recruiter::Article.find(params[:id])
-  end
 
   def new
     @article = current_user.articles.build

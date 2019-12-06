@@ -1,5 +1,5 @@
 .card.shadow.mb-4
-  = search_form_for q do |f|
+  = search_form_for q, url: :articles do |f|
     .card-header
       .form-group.row
         = f.label :all_atr_cont_terms, '検索ワード', class: 'col-auto col-form-label'

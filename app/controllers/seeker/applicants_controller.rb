@@ -1,9 +1,13 @@
 class Seeker::ApplicantsController < ApplicationController
+  include Pagy::Backend
+
   before_action :login_required
   before_action :only_seeker
 
   def index
-    @applicants = current_user.applicants
+    @q = current_user.applicants.ransack(sort_params)
+    @applicants = @q.result.includes(recruiter_article: {user: :profile})
+    @pagy, @applicants = pagy(@applicants, items: 20)
   end
 
 
@@ -27,11 +31,16 @@ class Seeker::ApplicantsController < ApplicationController
     if @applicant.user == current_user && @applicant.destroy
       # ToDo: 
       flash[:notice] = "応募を取り消しました"
-      render :index
+      redirect_to seeker_applicants_path
     else
       # ToDo: エラー表示
-      render :index
+      redirect_to seeker_applicants_path
     end
+  end
+  private
+
+  def sort_params
+    params.fetch(:q, {}).permit(:s)
   end
 
   

@@ -29,6 +29,11 @@ class Seeker::UsersController < UsersController
   def destroy
   end
 
+  def profile
+    @user = User.find(params[:id])
+    @profile = @user.profile
+  end
+
   private
   def create_profile(user)
     user.create_profile(content: '設定されていません')

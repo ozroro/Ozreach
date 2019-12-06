@@ -1,6 +1,5 @@
 tr
   th[scope="row"] = applicant.id
-  td = applicant.user.id
-  td = applicant.user.name
-  td = link_to applicant.recruiter_article.title, recruiter_article_path(applicant.recruiter_article)
+  td = link_to "#{applicant.user.id}：#{applicant.user.name}", profile_seeker_user_path(applicant.user)
+  td = link_to "#{applicant.recruiter_article.id}：#{applicant.recruiter_article.title}", article_path(applicant.recruiter_article)
   td = applicant.created_at

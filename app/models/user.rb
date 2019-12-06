@@ -33,7 +33,7 @@ class User < ApplicationRecord
   end
 
   def unsubscribed_seeker?(article)
-    return seeker? && !self.recruiter_articles.exists?(article.id)
+    return seeker? && !self.recruiter_articles.exists?(article&.id)
   end
 
   

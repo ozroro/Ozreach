@@ -9,14 +9,16 @@
       table.table.table-hover[width="100%"]
         thead
           tr
-            th[scope="col"] #
-            th[scope="col"] 企業/団体 名
-            th[scope="col"] 募集記事タイトル
-            th[scope="col"] 応募日時
+            th[scope="col"] = sort_link(@q, :id, '募集ID')
+            th[scope="col"] = sort_link(@q, :recruiter_article_user_profile_corporate_name, '企業/団体 名')
+            th[scope="col"] = sort_link(@q, :recruiter_article_title, '募集記事タイトル')
+            th[scope="col"] = sort_link(@q, :created_at, '応募日時')
             th[scope="col"] 
         tbody
-          = render partial: 'applicant', collection: current_user.applicants
+          = render partial: 'applicant', collection: @applicants
 
+  .d-flex.justify-content-center
+    == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1
 
 
 

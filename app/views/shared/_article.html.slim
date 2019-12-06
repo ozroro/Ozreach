@@ -1,3 +1,5 @@
+
+
 .card.shadow.mb-4.overview id="article-#{article.id}"
     .card-header
       h6.m-0.font-weight-bold.text-primary
@@ -11,7 +13,7 @@
             = article.title
           p.card-text
             = article.content
-          = link_to recruiter_article_path(article), class: "btn btn-secondary stretched-link"
+          = link_to article_path(article), class: "btn btn-secondary stretched-link"
             | 記事を読む
     .card-footer.text-muted.text-right
       = article.created_at

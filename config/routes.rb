@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :users, except: :index, concerns: :profile do
       get 'articles', on: :member
     end
-    resources :articles
+    resources :articles, except: [:index, :show]
     resources :applicants, only: [:index, :destory]
     get 'signup' => 'users#new'
   end
@@ -18,11 +18,13 @@ Rails.application.routes.draw do
     resources :users, except: :index, concerns: :profile
     get 'signup' => 'users#new'
     resources :applicants, only: [:index, :destroy]
+    
 
   end
 
   # post  'appllcant/:article_id' => 'seeker/applicant#create'
   resource :profile, only: [:edit, :show, :update]
+  resources :articles, only: [:show, :index]
   post '/applying/:article_id' => 'seeker/applicants#create', as: :applying
 
   root 'static_pages#top'
