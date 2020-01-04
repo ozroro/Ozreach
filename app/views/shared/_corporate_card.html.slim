@@ -1,0 +1,11 @@
+.card.shadow.mb-4.overview id="recruiter-#{recruiter.id}"
+  = image_tag recruiter.profile.thumbnail, class: "bd-placeholder-img card-img-top" if recruiter.profile.image.attached?
+  .card-body
+    h5.card-title
+      = recruiter.profile.corporate_name
+    p.card-text
+      = recruiter.profile.content
+      = link_to " ", profile_recruiter_user_path(recruiter), class: "stretched-link"
+          
+
+

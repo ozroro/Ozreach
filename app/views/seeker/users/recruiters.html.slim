@@ -1,0 +1,7 @@
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    | 企業一覧
+  = render partial: 'shared/recruiter_search_form', locals: {q: @q}
+  = render partial: 'shared/corporate_card', collection: @recruiters, as: 'recruiter'
+  .d-flex.justify-content-center
+    == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

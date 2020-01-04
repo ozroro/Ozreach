@@ -18,8 +18,7 @@ Rails.application.routes.draw do
     resources :users, except: :index, concerns: :profile
     get 'signup' => 'users#new'
     resources :applicants, only: [:index, :destroy]
-    
-
+    get 'recruiters' => 'users#recruiters'
   end
 
   # post  'appllcant/:article_id' => 'seeker/applicant#create'

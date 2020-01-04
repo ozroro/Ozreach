@@ -1,0 +1,10 @@
+.card.shadow.mb-4
+  = search_form_for q, url: :seeker_recruiters do |f|
+    .card-header
+      .form-group.row
+        = f.label :profile_corporate_name_cont, '企業名', class: 'col-2 col-form-label'
+        = f.search_field :profile_corporate_name_cont,  class: "form-control col-10 mr-auto", placeholder: "Search for...", "aria-label": "Search"
+      .form-group.row
+        = f.label :profile_content_cont, 'プロフィール', class: 'col-2 col-form-label'
+        = f.search_field :profile_content_cont,  class: "form-control col-10 mr-auto", placeholder: "Search for...", "aria-label": "Search"
+      = f.submit class: "btn btn-primary"

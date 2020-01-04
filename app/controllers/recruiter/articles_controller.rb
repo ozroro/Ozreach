@@ -46,6 +46,9 @@ class Recruiter::ArticlesController < ApplicationController
   def destroy
   end
 
+  def articles
+    
+  end
 
 
   private
