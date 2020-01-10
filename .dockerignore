@@ -1,0 +1,21 @@
+## Rails
+.rspec
+db/*.sqlite3
+db/*.sqlite3-jornal
+.byebug_history
+vendor/assets
+storage
+log
+tmp
+
+
+## Environment normalisation:
+.bundle
+vendor/bundle
+.git
+
+
+
+## docker
+.dockerignore
+containers
