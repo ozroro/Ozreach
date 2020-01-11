@@ -1,11 +1,3 @@
-GIT
-  remote: https://github.com/faker-ruby/faker.git
-  revision: f1c19a6a1a1d18682de5d358d3d8dea9e075cfff
-  branch: master
-  specs:
-    faker (2.10.0)
-      i18n (>= 1.6, < 1.8)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -52,8 +44,6 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     arel (9.0.0)
     autoprefixer-rails (9.7.3)
       execjs
@@ -79,9 +69,6 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -99,6 +86,8 @@ GEM
     factory_bot_rails (4.11.1)
       factory_bot (~> 4.11.1)
       railties (>= 3.0.0)
+    faker (2.10.0)
+      i18n (>= 1.6, < 1.8)
     ffi (1.11.3)
     font-awesome-sass (5.11.2)
       sassc (>= 1.11)
@@ -107,9 +96,8 @@ GEM
     hpricot (0.8.6)
     html2slim (0.2.0)
       hpricot
-    i18n (1.7.0)
+    i18n (1.7.1)
       concurrent-ruby (~> 1.0)
-    io-like (0.3.0)
     jbuilder (2.9.1)
       activesupport (>= 4.2.0)
     jquery-easing-rails (0.0.2)
@@ -146,7 +134,7 @@ GEM
     popper_js (1.14.5)
     public_suffix (4.0.3)
     puma (3.12.2)
-    rack (2.0.8)
+    rack (2.1.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (5.2.4.1)
@@ -245,7 +233,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    sqlite3 (1.4.2)
     temple (0.8.2)
     thor (1.0.1)
     thread_safe (0.3.6)
@@ -279,10 +266,9 @@ DEPENDENCIES
   bullet
   byebug
   capybara (>= 2.15)
-  chromedriver-helper
   coffee-rails (~> 4.2)
   factory_bot_rails (~> 4.11)
-  faker!
+  faker
   font-awesome-sass (~> 5.11.2)
   html2slim
   jbuilder (~> 2.5)
@@ -302,7 +288,6 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
-  sqlite3
   turbolinks (~> 5)
   tzinfo-data
   uglifier (>= 1.3.0)

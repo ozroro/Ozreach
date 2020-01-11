@@ -41,7 +41,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 4.11'
   # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
+
 
 end
 
@@ -61,7 +61,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
+
   gem 'rspec-rails', '~> 3.7'
 end
 
@@ -75,7 +75,7 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'bootstrap'
 gem 'jquery-rails'
-gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'faker'
 
 gem 'font-awesome-sass', '~> 5.11.2'
 gem 'jquery-easing-rails'
