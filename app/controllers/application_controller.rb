@@ -31,4 +31,6 @@ class ApplicationController < ActionController::Base
     redirect_to root_url unless current_user.id == params[:id]
   end
 
+
+  # docker comment test
 end
