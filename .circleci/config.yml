@@ -20,7 +20,7 @@ jobs: # ステップの集合
       # MYSQL_ROOT_HOST=% \
       # MYSQL_USER=root
       - image: selenium/standalone-chrome-debug
-    working_directory: /myapp
+
 
     steps: # 実行可能コマンドの集合
       - checkout # ソースコードを作業ディレクトリにチェックアウトする特別なステップ
