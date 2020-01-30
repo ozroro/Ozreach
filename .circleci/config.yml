@@ -3,10 +3,11 @@ jobs: # ステップの集合
   build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
     parallelism: 3 # このジョブのインスタンスを 3つ並列実行します
     docker: # Docker でステップを実行します
-      - image: ozroro/ozreach-circleci:latest # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
+      - image: circleci/ruby:2.6.5-node # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
         environment: # プライマリコンテナの環境変数
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
           DB_HOST: 127.0.0.1
           DB_USERNAME: 'root'
           DB_PASSWORD: ''
@@ -23,9 +24,13 @@ jobs: # ステップの集合
 
     steps: # 実行可能コマンドの集合
       - checkout # ソースコードを作業ディレクトリにチェックアウトする特別なステップ
-
+      - run:
+          name: ImageMagickインストール
+          command: sudo apt-get update && sudo apt-get install -y imagemagick
       # Bundler のバージョンを指定します
-
+      - run:
+          name: Bundler を指定
+          command: bundle -v
 
       # バンドルキャッシュを復元します
       # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
@@ -44,7 +49,7 @@ jobs: # ステップの集合
       - save_cache:
           key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
-            - /usr/local/bundle
+            - vendor/bundle
 
       # アプリケーションで Webpacker または Yarn を他の何らかの方法で使用する場合にのみ必要です
 
