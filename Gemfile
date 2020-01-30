@@ -6,7 +6,7 @@ ruby '2.6.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.3'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+# gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -36,14 +36,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'mysql2', '~> 0.5.3'
 
-
+gem 'unicorn'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 4.11'
   # Use sqlite3 as the database for Active Record
-
+  gem
 
 end
 
@@ -56,6 +56,8 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'spring-commands-rspec'
   gem 'bullet'
+  gem 'html2slim'
+
 end
 
 group :test do
@@ -65,6 +67,7 @@ group :test do
   # Easy installation and use of chromedriver to run system tests with Chrome
 
   gem 'rspec-rails', '~> 3.7'
+  gem 'rspec_junit_formatter'
 end
 
 group :production do
@@ -74,7 +77,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'slim-rails'
-gem 'html2slim'
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'faker'

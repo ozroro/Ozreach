@@ -31,3 +31,5 @@
 /config/master.key
 
 /Cheat-Sheets/*
+
+.env

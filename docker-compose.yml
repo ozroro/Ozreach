@@ -1,25 +1,38 @@
 version: '3'
 
 services:
-  web:
+  nginx:
+    build: containers/nginx
+    volumes: 
+      - public:/myapp/public:ro
+    ports:
+      - '8080:80'
+    links:
+      - rails
+
+  rails:
     build: .
-    command: ash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: ash -c "rm -f tmp/pids/server.pid && bundle exec unicorn -c config/unicorn.rb -E development"
     volumes:
       - .:/myapp
+      - public:/myapp/public
     ports:
       - "3000:3000"
     links:
       - db
       - selenium_chrome
     environment: 
-      - "SELENIUM_DRIVER_URL=http://selenium_chrome:4444/wd/hub"
+      DB_HOST: db
+      DB_USERNAME: $DB_USERNAME
+      DB_PASSWORD: $DB_PASSWORD
+      SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
 
   db:
     image: mysql:5.7
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
       MYSQL_DATABASE: root
     ports:
       - "3306:3306"
@@ -33,4 +46,5 @@ services:
 
 volumes:
   mysql-data:
+  public:
 
