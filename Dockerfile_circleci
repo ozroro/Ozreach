@@ -15,13 +15,8 @@ RUN apk update && \
     apk add --no-cache ${RUNTIME_PACKAGES} && \
     apk add --virtual build-packages --no-cache ${BUILD_PACKAGES} && \
     bundle install && \
-    apk del build-packages
+    rm -f Gemfile Gemfile.lock
 
-COPY . ${ROOT}
 
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-E", "development"]

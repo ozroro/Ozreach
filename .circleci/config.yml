@@ -3,7 +3,7 @@ jobs: # ステップの集合
   build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
     parallelism: 3 # このジョブのインスタンスを 3つ並列実行します
     docker: # Docker でステップを実行します
-      - image: ozroro/ozreach:latest # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
+      - image: ozroro/ozreach-circleci:latest # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
         environment: # プライマリコンテナの環境変数
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
@@ -70,7 +70,7 @@ jobs: # ステップの集合
 
       - run:
           name: データベースをセットアップ
-          command: bin/rails db:schema:load --trace
+          command: rails db:schema:load --trace
 
       - run:
           name: RSpec を並列実行
