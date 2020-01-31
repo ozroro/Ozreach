@@ -43,7 +43,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 4.11'
   # Use sqlite3 as the database for Active Record
-
+  gem 'puma', '~> 3.11'
 end
 
 group :development do
