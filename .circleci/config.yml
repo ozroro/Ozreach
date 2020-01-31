@@ -13,7 +13,10 @@ jobs: # ステップの集合
           DB_PASSWORD: ''
           RAILS_ENV: test
           SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
-      - image: circleci/mysql:5.7 # データベースイメージ 以下が標準で設定されてる
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_DATABASE: rails_test 
+      # データベースイメージ 以下が標準で設定されてる
       # MYSQL_ALLOW_EMPTY_PASSWORD=true \
       # MYSQL_DATABASE=circle_test \
       # MYSQL_HOST=127.0.0.1 \
