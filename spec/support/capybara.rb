@@ -7,7 +7,7 @@ RSpec.configure do |config|
       url: ENV.fetch("SELENIUM_DRIVER_URL"),
       desired_capabilities: :chrome
     }
-    Capybara.server_host = 'rails'
-    Capybara.app_host='http://rails'
+    Capybara.server_host = ENV.fetch("CAPYBARA_SERVERHOST") { 'localhost' }
+    Capybara.app_host="http://#{Capybara.server_host}:3000"
   end
 end
