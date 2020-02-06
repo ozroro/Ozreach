@@ -1,4 +1,4 @@
-version: 2 # CircleCI 2.0 を使用します
+version: 2.1 
 jobs: # ステップの集合
   build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
     parallelism: 3 # このジョブのインスタンスを 3つ並列実行します

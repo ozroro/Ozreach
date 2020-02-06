@@ -75,11 +75,11 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'slim-rails'
-gem 'bootstrap'
-gem 'jquery-rails'
+# gem 'bootstrap'
+# gem 'jquery-rails'
 gem 'faker'
 
 gem 'font-awesome-sass', '~> 5.11.2'
-gem 'jquery-easing-rails'
+# gem 'jquery-easing-rails'
 gem 'pagy', '~> 3.5'
 gem 'ransack'

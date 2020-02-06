@@ -1,0 +1,35 @@
+FROM ruby:2.6.5-alpine3.10
+
+ENV RUNTIME_PACKAGES="bash file imagemagick libxml2 libxslt nodejs mariadb-connector-c-dev tzdata yarn vim" \
+    BUILD_PACKAGES="build-base libxml2-dev libxslt-dev" \
+    ROOT="/myapp" \
+    LANG=C.UTF-8 \
+    TZ=Asia/Tokyo
+
+ENV RAILS_ENV="production" \
+    NODE_ENV="production"
+
+WORKDIR ${ROOT}
+COPY Gemfile ${ROOT}
+COPY Gemfile.lock ${ROOT}
+
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache ${RUNTIME_PACKAGES} && \
+    apk add --virtual build-packages --no-cache ${BUILD_PACKAGES} && \
+    bundle install -j$(getconf _NPROCESSORS_ONLN) --without test development && \
+    apk del --purge build-packages
+
+COPY . ${ROOT}
+
+# RUN bundle exec rails assets:clobber
+RUN bundle exec rails assets:precompile && \
+    yarn cache clean && \
+    rm -rf node_modules tmp/cache
+
+ENV RAILS_SERVE_STATIC_FILES="true"
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-E", "production"]

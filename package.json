@@ -1,5 +1,15 @@
 {
   "name": "Ozreach",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "jquery.easing": "^1.4.1",
+    "popper.js": "^1.16.1"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:ozroro/Ozreach.git",
+  "author": "ozroro <r.sleepyhead@gmail.com>",
+  "license": "MIT"
 }
