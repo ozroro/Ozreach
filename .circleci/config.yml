@@ -56,21 +56,21 @@ jobs: # ステップの集合
 
       # アプリケーションで Webpacker または Yarn を他の何らかの方法で使用する場合にのみ必要です
 
-      # - restore_cache:
-      #     keys:
-      #       - rails-demo-yarn-{{ checksum "yarn.lock" }}
-      #       - rails-demo-yarn-
+      - restore_cache:
+          keys:
+            - rails-yarn-v1-{{ checksum "yarn.lock" }}
+            - rails-yarn-v1-
 
-      # - run:
-      #     name: Yarn をインストール
-      #     command: yarn install --cache-folder ~/.cache/yarn
+      - run:
+          name: Yarn をインストール
+          command: yarn install --cache-folder ~/.cache/yarn
 
-      # # Yarn または Webpacker のキャッシュを保存します
+      # Yarn または Webpacker のキャッシュを保存します
 
-      # - save_cache:
-      #     key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-      #     paths:
-      #       - ~/.cache/yarn
+      - save_cache:
+          key: rails-yarn-v1-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
 
       - run:
           name: DB を待機
