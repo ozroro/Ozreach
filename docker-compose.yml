@@ -15,6 +15,8 @@ services:
     build:
       context: .
       dockerfile: "Dockerfile_${DOCKER_RAILS_ENV}"
+      args:
+        - SECRET_KEY_BASE=${DOCKER_SECRET_KEY_BASE}  
     image: ozroro/ozreach_rails_${DOCKER_RAILS_ENV}
     init: true
     tty: true
@@ -35,6 +37,7 @@ services:
       CAPYBARA_SERVERHOST: rails
       SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
       RAILS_SERVE_STATIC_FILES: 
+      SECRET_KEY_BASE: $DOCKER_SECRET_KEY_BASE
 
   db:
     image: mysql:5.7

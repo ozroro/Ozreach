@@ -1,12 +1,12 @@
 FROM ruby:2.6.5-alpine3.10
+ARG SECRET_KEY_BASE="a71082db97ca8cad38d03483c3a46ee9a2c11023920296afbf272bb78eaa1591b3c3da6bb815854afbddac97cbfb2c1733c1d0a56ba797052f879d1ed51bafd4"
 
-ENV RUNTIME_PACKAGES="bash file imagemagick libxml2 libxslt nodejs mariadb-connector-c-dev tzdata yarn vim" \
-    BUILD_PACKAGES="build-base libxml2-dev libxslt-dev" \
-    ROOT="/myapp" \
-    LANG=C.UTF-8 \
-    TZ=Asia/Tokyo
+ARG RUNTIME_PACKAGES="bash file imagemagick libxml2 libxslt nodejs mariadb-connector-c-dev tzdata yarn vim"
+ARG BUILD_PACKAGES="build-base libxml2-dev libxslt-dev" 
+ARG ROOT="/myapp"
 
-ENV RAILS_ENV="production" \
+ENV LANG=C.UTF-8TZ=Asia/Tokyo \
+    RAILS_ENV="production" \
     NODE_ENV="production"
 
 WORKDIR ${ROOT}
@@ -23,7 +23,7 @@ RUN apk update && \
 COPY . ${ROOT}
 
 # RUN bundle exec rails assets:clobber
-RUN bundle exec rails assets:precompile && \
+RUN SECRET_KEY_BASE=${SECRET_KEY_BASE} bundle exec rails assets:precompile && \
     yarn cache clean && \
     rm -rf node_modules tmp/cache && \
     mkdir tmp/pids tmp/sockets
