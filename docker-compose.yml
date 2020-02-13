@@ -5,20 +5,23 @@ services:
     build: containers/nginx
     volumes: 
       - public:/myapp/public
+      - sockets:/myapp/tmp/sockets/
     ports:
       - '8080:80'
-    links:
+    depends_on:
       - rails
 
   rails:
     build:
       context: .
       dockerfile: "Dockerfile_${DOCKER_RAILS_ENV}"
+    image: ozroro/ozreach_rails_${DOCKER_RAILS_ENV}
     init: true
     tty: true
     volumes:
       - .:/myapp
       - public:/myapp/public
+      - sockets:/myapp/tmp/sockets/
     ports:
       - "3000:3000"
     links:
@@ -31,7 +34,7 @@ services:
       DB_PASSWORD: $DB_PASSWORD
       CAPYBARA_SERVERHOST: rails
       SELENIUM_DRIVER_URL: http://selenium_chrome:4444/wd/hub
-      RAILS_SERVE_STATIC_FILES: 1
+      RAILS_SERVE_STATIC_FILES: 
 
   db:
     image: mysql:5.7
@@ -53,4 +56,5 @@ services:
 volumes:
   mysql-data:
   public:
+  sockets:
 

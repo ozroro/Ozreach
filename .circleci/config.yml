@@ -1,10 +1,16 @@
 version: 2.1 
+executors:
+  docker-publisher:
+    environment:
+      IMAGE_NAME: ozroro/ozreach_rails
+    docker:
+      - image: circleci/buildpack-deps:stretch
 jobs: # ステップの集合
-  build: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
+  test: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
     parallelism: 3 # このジョブのインスタンスを 3つ並列実行します
-    docker: # Docker でステップを実行します
-      - image: circleci/ruby:2.6.5-node # このイメージをすべての `steps` が実行されるプライマリコンテナとして使用します
-        environment: # プライマリコンテナの環境変数
+    docker: 
+      - image: circleci/ruby:2.6.5-node 
+        environment: 
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
@@ -23,50 +29,33 @@ jobs: # ステップの集合
       # MYSQL_ROOT_HOST=% \
       # MYSQL_USER=root
       - image: selenium/standalone-chrome-debug
-
-
-    steps: # 実行可能コマンドの集合
-      - checkout # ソースコードを作業ディレクトリにチェックアウトする特別なステップ
+    steps: #
+      - checkout 
       - run:
           name: ImageMagickインストール
           command: sudo apt-get update && sudo apt-get install -y imagemagick
-      # Bundler のバージョンを指定します
       - run:
           name: Bundler を指定
           command: bundle -v
-
-      # バンドルキャッシュを復元します
-      # 依存関係キャッシュについては https://circleci.com/docs/ja/2.0/caching/ をお読みください
-
       - restore_cache:
           keys:
             - rails-bundle-v1-{{ checksum "Gemfile.lock" }}
             - rails-bundle-v1-
-
-      - run: # Ruby の依存関係をインストールします
+      - run: 
           name: バンドルインストール
           command: bundle check || bundle install
-
-      # Ruby の依存関係のバンドルキャッシュを保存します
-
       - save_cache:
           key: rails-bundle-v1-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
 
-      # アプリケーションで Webpacker または Yarn を他の何らかの方法で使用する場合にのみ必要です
-
       - restore_cache:
           keys:
             - rails-yarn-v1-{{ checksum "yarn.lock" }}
             - rails-yarn-v1-
-
       - run:
           name: Yarn をインストール
           command: yarn install --cache-folder ~/.cache/yarn
-
-      # Yarn または Webpacker のキャッシュを保存します
-
       - save_cache:
           key: rails-yarn-v1-{{ checksum "yarn.lock" }}
           paths:
@@ -75,7 +64,6 @@ jobs: # ステップの集合
       - run:
           name: DB を待機
           command: dockerize -wait tcp://localhost:3306 -timeout 1m
-
       - run:
           name: データベースをセットアップ
           command: bin/rails db:schema:load --trace
@@ -89,8 +77,53 @@ jobs: # ステップの集合
                               --format progress \
                               $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
 
-      # タイミング解析のテスト結果を保存します
 
       - store_test_results: # テストサマリー (https://circleci.com/docs/ja/2.0/collect-test-data/) に表示するテスト結果をアップロードします
           path: test_results
       # デプロイコンフィグの例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください
+  build:
+    executor: docker-publisher
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Docker image
+          command: docker build -f Docker_production -t $IMAGE_NAME:latest .
+      - run:
+          name: Archive Docker image
+          command: docker save -o image.tar $IMAGE_NAME
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./image.tar
+
+  publish-latest:
+    executor: docker-publisher
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - run:
+          name: Load archived Docker image
+          command: docker load -i /tmp/workspace/image.tar
+      - run:
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:latest
+workflows:
+  version: 2
+  build-master:
+    jobs:
+      - test
+      - build:
+          requires:
+           - test
+          filters:
+            branches:
+              only: master
+      - publish-latest:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master

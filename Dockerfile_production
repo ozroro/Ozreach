@@ -25,11 +25,11 @@ COPY . ${ROOT}
 # RUN bundle exec rails assets:clobber
 RUN bundle exec rails assets:precompile && \
     yarn cache clean && \
-    rm -rf node_modules tmp/cache
+    rm -rf node_modules tmp/cache && \
+    mkdir tmp/pids tmp/sockets
 
-ENV RAILS_SERVE_STATIC_FILES="true"
+# ENV RAILS_SERVE_STATIC_FILES="true"
 COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
-EXPOSE 3000
 CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-E", "production"]

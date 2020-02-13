@@ -13,9 +13,12 @@ tmp
 .bundle
 vendor/bundle
 .git
-
+.env
 
 
 ## docker
 .dockerignore
 containers
+
+## etc
+Cheat-Sheets
