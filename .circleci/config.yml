@@ -101,6 +101,7 @@ jobs: # ステップの集合
   publish-latest:
     executor: docker-publisher
     steps:
+      - setup_remote_docker
       - attach_workspace:
           at: /tmp/workspace
       - run:
