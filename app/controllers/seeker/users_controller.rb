@@ -3,12 +3,12 @@ class Seeker::UsersController < UsersController
 
 
   def create
-    @user = Seeker::User.new(user_params :seeker)
-    if @user.save
-      create_profile(@user)
-      redirect_to root_url, notice: "ユーザ「#{@user.name}」を登録しました。"
+    @seeker_user = Seeker::User.new(user_params :seeker)
+    if @seeker_user.save
+      create_profile(@seeker_user)
+      redirect_to root_url, notice: "ユーザ「#{@seeker_user.name}」を登録しました。"
     else
-      render :new
+      render template: "users/new", layout: "sessions"
     end
   end
 
@@ -17,10 +17,6 @@ class Seeker::UsersController < UsersController
   end
 
   def show
-  end
-
-  def new
-    @user = Seeker::User.new
   end
 
   def edit

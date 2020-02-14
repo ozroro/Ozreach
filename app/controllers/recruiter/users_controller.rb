@@ -1,11 +1,11 @@
 class Recruiter::UsersController < UsersController
   def create
-    @user = Recruiter::User.new(user_params :recruiter)
-    if @user.save
-      create_profile(user)
-      redirect_to root_url, notice: "ユーザ「#{@user.name}」を登録しました。"
+    @recruiter_user = Recruiter::User.new(user_params :recruiter)
+    if @recruiter_user.save
+      create_profile(@recruiter_user)
+      redirect_to root_url, notice: "ユーザ「#{@recruiter_user.name}」を登録しました。"
     else
-      render :new
+      render template: "users/new", layout: "sessions"
     end
   end
 
@@ -16,10 +16,6 @@ class Recruiter::UsersController < UsersController
   def show
   end
 
-  def new
-    @user = Recruiter::User.new
-
-  end
 
   def edit
   end

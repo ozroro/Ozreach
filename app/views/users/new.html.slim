@@ -1,0 +1,30 @@
+.container
+  .card.o-hidden.border-0.shadow-lg.my-5
+    .card-header
+      nav
+        #nav-tab.nav.nav-tabs role="tablist" 
+          a#nav-seeker-tab.nav-item.nav-link.active aria-controls="nav-seeker" aria-selected="true" data-toggle="tab" href="#nav-seeker" role="tab"  求職者として登録
+          a#nav-recuruiter-tab.nav-item.nav-link aria-controls="nav-recruiter" aria-selected="false" data-toggle="tab" href="#nav-recruiter" role="tab"  リクルーターとして登録
+    .card-body.p-0
+      #nav-tabContent.tab-content
+        #nav-seeker.tab-pane.fade.show.active aria-labelledby="nav-seeker-tab" role="tabpanel"
+          .row
+            .col-lg-5.d-none.d-lg-block.bg-register-image
+            .col-lg-7
+              .p-5
+                .text-center
+                  h1.h4.text-gray-900.mb-4
+                    | Create a Seeker Acount!
+                = render partial: 'form', locals: { user: @seeker_user }
+
+        #nav-recruiter.tab-pane.fade aria-labelledby="nav-recruiter-tab" role="tabpanel"
+          .row
+            .col-lg-5.d-none.d-lg-block.bg-register-image
+            .col-lg-7
+              .p-5
+                .text-center
+                  h1.h4.text-gray-900.mb-4
+                    | Create a Recruiter Account!
+                = render partial: 'form', locals: { user: @recruiter_user }
+
+
