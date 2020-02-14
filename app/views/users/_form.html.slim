@@ -1,0 +1,15 @@
+= form_with model: user, local: true do |f|
+  .form-group
+    = f.text_field :name, class: 'form-control form-control-user', placeholder: "User Name", value: user&.name
+  .form-group
+    = f.text_field :email, class: 'form-control form-control-user', placeholder: "Enter Email Address...", value: user&.email
+  .form-group.row
+    .col-sm-6.mb-3.mb-sm-0
+      = f.password_field :password, class: 'form-control form-control-user', placeholder: "Password"
+    .col-sm-6
+      = f.password_field :password, class: 'form-control form-control-user', placeholder: "Repeat Password"
+  = f.submit 'Register Account', class: 'btn btn-primary btn-user btn-block'
+hr
+.text-center
+  = link_to login_path, class: 'small'
+    | Already have an account? Login!

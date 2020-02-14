@@ -6,17 +6,17 @@ Rails.application.routes.draw do
   end
 
   namespace :recruiter do
-    resources :users, except: :index, concerns: :profile do
+    resources :users, except: [:index, :new], concerns: :profile do
       get 'articles', on: :member
     end
     resources :articles, except: [:index, :show]
     resources :applicants, only: [:index, :destory]
-    get 'signup' => 'users#new'
+    # get 'signup' => 'users#new'
   end
 
   namespace :seeker do
-    resources :users, except: :index, concerns: :profile
-    get 'signup' => 'users#new'
+    resources :users, except: [:index, :new], concerns: :profile
+    # get 'signup' => 'users#new'
     resources :applicants, only: [:index, :destroy]
     get 'recruiters' => 'users#recruiters'
   end
@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get  '/help' => 'static_pages#help'
   get  '/about' => 'static_pages#about'
   get  '/contact' => 'static_pages#contact'
+  get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
