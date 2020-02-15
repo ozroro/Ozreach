@@ -112,6 +112,8 @@ jobs: # ステップの集合
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
+  
+
 workflows:
   version: 2
   build-master:
@@ -119,7 +121,7 @@ workflows:
       - test
       - build:
           requires:
-           - test
+            - test
           filters:
             branches:
               only: master
