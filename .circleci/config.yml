@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   bundle-install: toshimaru/bundle-install@0.3.1
   aws-ecs: circleci/aws-ecs@1.1.0
-  docker-layer-caching: shipchain/docker-layer-caching@1.0.0
+
 executors:
   docker-publisher:
     environment:
@@ -10,6 +10,97 @@ executors:
       DOCKERFILE_NAME: Dockerfile_production
     docker:
       - image: circleci/buildpack-deps:stretch
+
+# ----------------- DIY Docker Layer Caching from here --------
+commands:
+  restore_dlc:
+    parameters:
+      dockerfile:
+        type: string
+        default: "Dockerfile"
+      lockfile:
+        type: string
+        default: "Gemifile.lock"
+    steps:
+      - run:
+          name: Check if there are newer base images on Docker Hub
+          command: |
+            BASE_IMAGE_NAMES=$(grep "^FROM" <<parameters.dcokerfile>> | cut -d' ' -f2 | uniq)
+            cp <<parameters.dcokerfile>> docker-layer-caching-key.txt
+            for n in $BASE_IMAGE_NAMES; do
+
+              if grep -q ':' \<<< "$n"; then
+                REPOSITORY=$(cut -d':' -f1 \<<< "$n")
+                TAG=$(cut -d':' -f2 \<<< "$n")
+              else
+                continue  # ignore multi-stage aliases
+              fi
+
+              # If there is no slash in the repo name, it is an official image,
+              # we will need to prepend library/ to it
+              if ! grep -q '/' \<<< "$REPOSITORY"; then
+                REPOSITORY="library/$REPOSITORY"
+              fi
+
+              # Source: https://stackoverflow.com/questions/41808763/how-to-determine-the-docker-image-id-for-a-tag-via-docker-hub-api
+              TOKEN=$(curl -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:$REPOSITORY:pull" | jq -r .token)
+              IMAGE_DIGEST=$(curl -s -H "Authorization: Bearer $TOKEN" -H "Accept: application/vnd.docker.distribution.manifest.v2+json" https://index.docker.io/v2/$REPOSITORY/manifests/$TAG | jq -r .config.digest)
+
+              # Append the newfound IDs to form the key
+              echo $IMAGE_DIGEST >> docker-layer-caching-key.txt
+            done
+      - restore_cache:
+          keys:
+            - docker-layers-{{ checksum "docker-layer-caching-key.txt" }}
+            - docker-layers-{{ checksum "docker-layer-caching-key.txt" }}-{{ checksum "<< parameters.lockfile >>" }}
+      - run:
+          name: Load Docker layer cache
+          command: |
+            # credits to: https://blog.jondh.me.uk/2018/04/strategies-for-docker-layer-caching-in-circleci/
+            set +o pipefail
+            if [ -f /home/circleci/docker-caches/${CIRCLE_PROJECT_REPONAME}.tar.gz ]; then
+              gunzip -c /home/circleci/docker-caches/${CIRCLE_PROJECT_REPONAME}.tar.gz | docker load;
+              docker images;
+            fi
+  save_dlc:
+    parameters:
+      dockerfile:
+        type: string
+        default: "Dockerfile"
+      lockfile:
+        type: string
+        default: "Gemifile.lock"
+      image_name:
+        type: string
+      arg:
+        type: string
+        default: "NON_ARG=1"
+
+    steps:
+      - run:
+          name: Save Docker layer cache
+          command: |
+            mkdir -p /home/circleci/docker-caches
+            docker build \
+              -f << parameters.dockerfile >> \
+              --tag << parameters.image_name >> \
+              --build-arg << parameters.arg >> . \
+              | grep '\-\-\->' \
+              | grep -v 'Using cache' \
+              | sed -e 's/[ >-]//g' > /tmp/layers.txt
+            docker save $(cat /tmp/layers.txt) | gzip > /home/circleci/docker-caches/${CIRCLE_PROJECT_REPONAME}.tar.gz
+      - save_cache:
+          key: docker-layers-{{ checksum "docker-layer-caching-key.txt" }}
+          paths:
+            - /home/circleci/docker-caches
+      - save_cache:
+          key: docker-layers-{{ checksum "docker-layer-caching-key.txt" }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - /home/circleci/docker-caches
+    
+# ----------------- DIY Docker Layer Caching to here --------
+
+
 jobs: # ステップの集合
   rspec: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
     parallelism: 3 # このジョブのインスタンスを 3つ並列実行します
@@ -70,20 +161,19 @@ jobs: # ステップの集合
     steps:
       - checkout
       - setup_remote_docker
-      - docker-layer-caching/restore_dlc:
-          lockfile: "Gemfile.lock"
+      - restore_dlc
       - run:
           name: Build Docker image
           command: docker build -t $IMAGE_NAME:latest --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE .
-      - docker-layer-caching/save_dlc:
-          image: "$IMAGE_NAME:latest"
-          stage: "stage"
-          lockfile: "Gemfile.lock"
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
+      - save_dlc:
+          image_name: "$IMAGE_NAME:latest"
+          arg: "SECRET_KEY_BASE=$SECRET_KEY_BASE"
+
 
 workflows:
   version: 2
