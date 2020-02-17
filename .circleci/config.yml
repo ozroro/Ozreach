@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   bundle-install: toshimaru/bundle-install@0.3.1
   aws-ecs: circleci/aws-ecs@1.1.0
-#   docker-layer-caching: shipchain/docker-layer-caching@1.0.0
+  docker-layer-caching: shipchain/docker-layer-caching@1.0.0
 executors:
   docker-publisher:
     environment:
@@ -65,61 +65,40 @@ jobs: # ステップの集合
       - store_test_results: # テストサマリー (https://circleci.com/docs/ja/2.0/collect-test-data/) に表示するテスト結果をアップロードします
           path: test_results
       # デプロイコンフィグの例については https://circleci.com/docs/ja/2.0/deployment-integrations/ を参照してください
-  build:
+  build-and-publish:
     executor: docker-publisher
     steps:
       - checkout
       - setup_remote_docker
+      - docker-layer-caching/restore_dlc:
+          lockfile: "Gemfile.lock"
       - run:
           name: Build Docker image
-          command: docker build -f $DOCKERFILE_NAME -t $IMAGE_NAME:latest --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE .
-      - run:
-          name: Archive Docker image
-          command: docker save -o image.tar $IMAGE_NAME
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./image.tar
-
-  publish-latest:
-    executor: docker-publisher
-    steps:
-      - setup_remote_docker
-      - attach_workspace:
-          at: /tmp/workspace
-      - run:
-          name: Load archived Docker image
-          command: docker load -i /tmp/workspace/image.tar
+          command: docker build -t $IMAGE_NAME:latest --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE .
+      - docker-layer-caching/save_dlc:
+          image: "$IMAGE_NAME:latest"
+          stage: "stage"
+          lockfile: "Gemfile.lock"
       - run:
           name: Publish Docker Image to Docker Hub
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
 
-
-  
-
 workflows:
   version: 2
   build-master:
     jobs:
       - rspec
-      - build:
+      - build-and-publish:
           requires:
             - rspec
           filters:
             branches:
               only: master
-      - publish-latest:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
-
       - aws-ecs/deploy-service-update:
           requires:
-            - publish-latest
+            - build-and-publish
           family: '${MY_APP_PREFIX}_WebServer'
           cluster-name: '${MY_APP_PREFIX}'
           service-name: '${MY_APP_PREFIX}'
