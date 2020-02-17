@@ -18,9 +18,9 @@ working_directory RAILS_ROOT
 # 接続タイムアウト時間
 timeout 30
 
-# Unicornのエラーログと通常ログの位置を指定。
-stderr_path "#{RAILS_ROOT}/log/unicorn_stderr.log"
-stdout_path "#{RAILS_ROOT}/log/unicorn_stdout.log"
+# Unicornのエラーログと通常ログの位置を指定。未指定の場合は標準出力にでる
+# stderr_path "#{RAILS_ROOT}/log/unicorn_stderr.log"
+# stdout_path "#{RAILS_ROOT}/log/unicorn_stdout.log"
 
 # Nginxで使用する場合は以下の設定を行う。
 listen "#{RAILS_ROOT}/tmp/sockets/.unicorn.sock"

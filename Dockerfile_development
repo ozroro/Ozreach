@@ -14,7 +14,7 @@ RUN apk update && \
     apk upgrade && \
     apk add --no-cache ${RUNTIME_PACKAGES} && \
     apk add --virtual build-packages --no-cache ${BUILD_PACKAGES} && \
-    bundle install && \
+    bundle install --without production && \
     apk del build-packages
 
 COPY . ${ROOT}

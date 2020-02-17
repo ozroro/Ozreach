@@ -1,5 +1,6 @@
 version: 2.1 
-# orbs:
+orbs:
+  bundle-install: toshimaru/bundle-install@0.3.1
 #   docker-layer-caching: shipchain/docker-layer-caching@1.0.0
 executors:
   docker-publisher:
@@ -9,13 +10,11 @@ executors:
     docker:
       - image: circleci/buildpack-deps:stretch
 jobs: # ステップの集合
-  test: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
+  rspec: # Workflows を使用しない実行では、エントリポイントとして `build` ジョブが必要
     parallelism: 3 # このジョブのインスタンスを 3つ並列実行します
     docker: 
       - image: circleci/ruby:2.6.5-node 
         environment: 
-          BUNDLE_JOBS: 3
-          BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           DB_HOST: 127.0.0.1
           DB_USERNAME: 'root'
@@ -25,32 +24,13 @@ jobs: # ステップの集合
       - image: circleci/mysql:5.7
         environment:
           MYSQL_DATABASE: rails-test 
-      # データベースイメージ 以下が標準で設定されてる
-      # MYSQL_ALLOW_EMPTY_PASSWORD=true \
-      # MYSQL_DATABASE=circle_test \
-      # MYSQL_HOST=127.0.0.1 \
-      # MYSQL_ROOT_HOST=% \
-      # MYSQL_USER=root
-      - image: selenium/standalone-chrome-debug
+      - image: selenium/standalone-chrome
     steps: #
       - checkout 
       - run:
           name: ImageMagickインストール
           command: sudo apt-get update && sudo apt-get install -y imagemagick
-      - run:
-          name: Bundler を指定
-          command: bundle -v
-      - restore_cache:
-          keys:
-            - rails-bundle-v1-{{ checksum "Gemfile.lock" }}
-            - rails-bundle-v1-
-      - run: 
-          name: バンドルインストール
-          command: bundle check || bundle install
-      - save_cache:
-          key: rails-bundle-v1-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
+      - bundle-install/bundle-install
 
       - restore_cache:
           keys:
@@ -114,6 +94,8 @@ jobs: # ステップの集合
           command: |
             echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker push $IMAGE_NAME:latest
+
+
   
 
 workflows:
@@ -133,3 +115,11 @@ workflows:
           filters:
             branches:
               only: master
+
+      - aws-ecs/deploy-service-update:
+          requires:
+            - publish-latest
+          family: '${MY_APP_PREFIX}_WebServer'
+          cluster-name: '${MY_APP_PREFIX}'
+          service-name: '${MY_APP_PREFIX}'
+          container-image-name-updates: 'container=${MY_APP_PREFIX}_rails,tag=latest'
