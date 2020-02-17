@@ -25,8 +25,8 @@ commands:
       - run:
           name: Check if there are newer base images on Docker Hub
           command: |
-            BASE_IMAGE_NAMES=$(grep "^FROM" <<parameters.dcokerfile>> | cut -d' ' -f2 | uniq)
-            cp <<parameters.dcokerfile>> docker-layer-caching-key.txt
+            BASE_IMAGE_NAMES=$(grep "^FROM" <<parameters.dockerfile>> | cut -d' ' -f2 | uniq)
+            cp <<parameters.dockerfile>> docker-layer-caching-key.txt
             for n in $BASE_IMAGE_NAMES; do
 
               if grep -q ':' \<<< "$n"; then
@@ -94,7 +94,7 @@ commands:
           paths:
             - /home/circleci/docker-caches
       - save_cache:
-          key: docker-layers-{{ checksum "docker-layer-caching-key.txt" }}-{{ checksum "Gemfile.lock" }}
+          key: docker-layers-{{ checksum "docker-layer-caching-key.txt" }}-{{ checksum "<< parameters.lockfile >>" }}
           paths:
             - /home/circleci/docker-caches
     
