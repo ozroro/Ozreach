@@ -174,7 +174,6 @@ jobs: # ステップの集合
           image_name: "$IMAGE_NAME:latest"
           arg: "SECRET_KEY_BASE=$SECRET_KEY_BASE"
 
-
 workflows:
   version: 2
   build-master:
