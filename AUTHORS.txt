@@ -1,0 +1,27 @@
+****************************
+  Promodise
+
+Copyright (c) 2019 Themefisher
+Released under the MIT Licenses.
+https://themefisher.com/products/promodise-startup-business-template/
+
+-files-----------------------
+app/assets/stylesheets/static_pages/css/animate.min.scss
+app/assets/stylesheets/static_pages/css/responsive.scss
+app/assets/stylesheets/static_pages/css/style.scss
+app/assets/javascripts/static_pages/custom.js
+------------------------------
+
+
+
+******************************
+ SB Admin2
+Copyright (c) 2013-2019 Blackrock Digital LLC
+Released under the MIT Licenses.
+https://startbootstrap.com/themes/sb-admin-2/
+
+-files-----------------------
+app/assets/javascripts/home/sb-admin-2.js
+app/assets/stylesheets/mixins/sb-admin-2.scss
+------------------------------
+
