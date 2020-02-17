@@ -20,7 +20,7 @@ commands:
         default: "Dockerfile"
       lockfile:
         type: string
-        default: "Gemifile.lock"
+        default: "Gemfile.lock"
     steps:
       - run:
           name: Check if there are newer base images on Docker Hub
@@ -69,7 +69,7 @@ commands:
         default: "Dockerfile"
       lockfile:
         type: string
-        default: "Gemifile.lock"
+        default: "Gemfile.lock"
       image_name:
         type: string
       arg:
