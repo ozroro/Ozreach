@@ -1,27 +1,42 @@
-FROM ruby:2.6.5-alpine3.10
+FROM ruby:2.6.5
+ARG ROOT="/myapp" 
+ARG SECRET_KEY_BASE="a71082db97ca8cad38d03483c3a46ee9a2c11023920296afbf272bb78eaa1591b3c3da6bb815854afbddac97cbfb2c1733c1d0a56ba797052f879d1ed51bafd4"
+ARG ENTRYKIT_VERSION=0.4.0
 
-ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata mariadb-connector-c-dev vim imagemagick yarn" \
-    BUILD_PACKAGES="build-base curl-dev" \
-    ROOT="/myapp" \
-    LANG=C.UTF-8 \
-    TZ=Asia/Tokyo
+ENV LANG=C.UTF-8
+ENV TZ=Asia/Tokyo
+ENV RAILS_ENV=development
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+
+
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+    build-essential nodejs yarn libfontconfig1 && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir -p ${ROOT}}tmp/pids ${ROOT}tmp/sockets
+
+
+RUN wget https://github.com/progrium/entrykit/releases/download/v${ENTRYKIT_VERSION}/entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+    && tar -xvzf entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+    && rm entrykit_${ENTRYKIT_VERSION}_Linux_x86_64.tgz \
+    && mv entrykit /bin/entrykit \
+    && chmod +x /bin/entrykit \
+    && entrykit --symlink
 
 WORKDIR ${ROOT}
-COPY Gemfile ${ROOT}
-COPY Gemfile.lock ${ROOT}
 
-RUN apk update && \
-    apk upgrade && \
-    apk add --no-cache ${RUNTIME_PACKAGES} && \
-    apk add --virtual build-packages --no-cache ${BUILD_PACKAGES} && \
-    bundle install --without production && \
-    apk del build-packages
+ENTRYPOINT [ \
+    "prehook", "ruby -v", "--", \
+    "prehook", "rm -f /myapp/tmp/pids/unicorn.pid /myapp/tmp/pids/server.pid", "--", \
+    "prehook", "bundle install -j3 --quiet", "--", \
+    "switch", \
+        "shell=bash", \
+        "rspec=bundle exec rspec", \
+        "server=bundle exec rails s", "--", \
+        "server=bundle exec rails s" \
+]
 
-COPY . ${ROOT}
-
-COPY entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
-
-CMD ["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-E", "development"]
+CMD ["server"]

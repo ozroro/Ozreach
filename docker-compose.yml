@@ -10,6 +10,7 @@ services:
       - '8080:80'
     depends_on:
       - rails
+    
 
   rails:
     build:
@@ -18,12 +19,15 @@ services:
       args:
         - SECRET_KEY_BASE=${DOCKER_SECRET_KEY_BASE}  
     image: ozroro/ozreach_rails_${DOCKER_RAILS_ENV}
+    command: ${D_COMMAND}
     init: true
     tty: true
+    stdin_open: true
     volumes:
       - .:/myapp
       - public:/myapp/public
       - sockets:/myapp/tmp/sockets/
+      - bundle:/usr/local/bundle/
     ports:
       - "3000:3000"
     links:
@@ -48,6 +52,8 @@ services:
       MYSQL_DATABASE: root
     ports:
       - "3306:3306"
+    loggin:
+      driver: none
 
   selenium_chrome:
     image: selenium/standalone-chrome-debug
@@ -60,4 +66,7 @@ volumes:
   mysql-data:
   public:
   sockets:
+  bundle:
+    name: ${DOCKER_RAILS_ENV}-bundle
+
 

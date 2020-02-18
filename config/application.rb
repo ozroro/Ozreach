@@ -24,13 +24,6 @@ module Ozreach
             routing_specs: false
     end
     
-    config.unicorn_logger = Logger.new(STDOUT)
-    config.unicorn_logger.formatter = Logger::Formatter.new
-    config.logger = ActiveSupport::TaggedLogging.new(config.unicorn_logger)
-    
-    # set logger level as you wish (:trace, :debug, :info, :warn, :error, etc)
-    config.logger.level = Logger.const_get('DEBUG')
-    config.log_level = :debug
 
   end
 
