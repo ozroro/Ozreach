@@ -7,19 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 record_count = 50
 
-t = Time.current
+# t = Time.current
 
 def random_content
-  a = ""
-  rand(10..20).times do |n|
-    a += "　"
+  a = ''
+  rand(10..20).times do
+    a += '　'
     a += Faker::Lorem.paragraph(sentence_count: 5, supplemental: true, random_sentences_to_add: 5)
     a += "\n"
   end
-  return a
+  a
 end
 
-record_count.times do |n| 
+record_count.times do |n|
   recruiter = Recruiter::User.create!(name: Faker::Name.name, email: "recruiter#{n}@test.com", password: 'password', password_confirmation: 'password')
   recruiter.create_profile!(corporate_name: Faker::Company.name, content: random_content)
   article1 = recruiter.articles.create!(title: Faker::Company.catch_phrase, content: random_content)
@@ -29,14 +29,10 @@ record_count.times do |n|
   article1.image.attach(io: File.open('public/300x300.png'), filename: '300x300.png')
   article2.update!(created_at: 1.days.ago)
   article3.update!(created_at: 3.days.ago)
-
-
-
 end
 
 record_count.times do |n|
   seeker = Seeker::User.create!(name: Faker::Name.name, email: "seeker#{n}@test.com", password: 'password', password_confirmation: 'password')
   seeker.create_profile!(content: random_content)
-  (1..Recruiter::Article.count).to_a.sample(30).each { |n| seeker.applicants.create!(recruiter_article_id: n) }
+  (1..Recruiter::Article.count).to_a.sample(30).each {|article_id| seeker.applicants.create!(recruiter_article_id: article_id) }
 end
-

@@ -1,19 +1,17 @@
 class Seeker::UsersController < UsersController
   include Pagy::Backend
 
-
   def create
-    @seeker_user = Seeker::User.new(user_params :seeker)
+    @seeker_user = Seeker::User.new(user_params(:seeker))
     if @seeker_user.save
       create_profile(@seeker_user)
       redirect_to root_url, notice: "ユーザ「#{@seeker_user.name}」を登録しました。"
     else
-      render template: "users/new", layout: "sessions"
+      render template: 'users/new', layout: 'sessions'
     end
   end
 
   def home
-
   end
 
   def show
@@ -27,7 +25,6 @@ class Seeker::UsersController < UsersController
 
   def destroy
   end
-  
 
   def profile
     @user = User.find(params[:id])
@@ -41,16 +38,17 @@ class Seeker::UsersController < UsersController
   end
 
   private
-  def create_profile(user)
-    user.create_profile(content: '設定されていません')
-  end
 
-  def search_params
-    search_conditions = %i(
-      s
-      profile_corporate_name_cont
-      profile_content_cont
-    )
-    params.fetch(:q,{}).permit(search_conditions)
-  end
+    def create_profile(user)
+      user.create_profile(content: '設定されていません')
+    end
+
+    def search_params
+      search_conditions = %i[
+        s
+        profile_corporate_name_cont
+        profile_content_cont
+      ]
+      params.fetch(:q, {}).permit(search_conditions)
+    end
 end

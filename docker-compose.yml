@@ -15,11 +15,11 @@ services:
   rails:
     build:
       context: .
-      dockerfile: "Dockerfile_${DOCKER_RAILS_ENV}"
+      dockerfile: "Dockerfile-${DOCKER_RAILS_ENV}"
       args:
         - SECRET_KEY_BASE=${DOCKER_SECRET_KEY_BASE}  
     image: ozroro/ozreach_rails_${DOCKER_RAILS_ENV}
-    command: ${D_COMMAND}
+    command: ${D_COMMAND:-["bundle", "exec", "unicorn", "-c", "config/unicorn.rb", "-E", "production"]}
     init: true
     tty: true
     stdin_open: true
@@ -52,7 +52,7 @@ services:
       MYSQL_DATABASE: root
     ports:
       - "3306:3306"
-    loggin:
+    logging:
       driver: none
 
   selenium_chrome:

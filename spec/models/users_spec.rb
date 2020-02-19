@@ -1,6 +1,5 @@
 require 'rails_helper'
 
-
 # 練習のためにずらずら書いたけど、この程度の単純なバリデーションならそもそも書く必要ないかも
 RSpec.describe User, type: :model do
   before do
@@ -8,7 +7,6 @@ RSpec.describe User, type: :model do
   end
 
   describe 'バリデーション' do
-
     it '有効なname,email,passwordが設定されている場合 => Valid' do
       expect(@user).to be_valid
     end
@@ -23,7 +21,6 @@ RSpec.describe User, type: :model do
       @user.email = ''
       expect(@user).to_not be_valid
       expect(@user.errors[:email]).to be_present
-      
     end
 
     it 'emailの長さが256以上の場合 => Invalid' do
@@ -37,10 +34,11 @@ RSpec.describe User, type: :model do
       expect(@user).to_not be_valid
       expect(@user.errors[:email]).to be_present
     end
-    
+
     it 'emailがユニークでない場合　=> Invalid' do
-      common_email = "common@test.com"
-      common_email_user = FactoryBot.create(:recruiter, email: common_email)  
+      common_email = 'common@test.com'
+      # 共通のemailを持ったユーザーを作成しておく
+      FactoryBot.create(:recruiter, email: common_email)
       @user.email = common_email
       expect(@user).to_not be_valid
       expect(@user.errors[:email]).to be_present
@@ -59,16 +57,13 @@ RSpec.describe User, type: :model do
       expect(@user).to_not be_valid
       expect(@user.errors[:password]).to be_present
     end
-
   end
 
   describe 'recruiter? seeker? メソッド' do
-
     before do
       @recruiter = FactoryBot.create(:recruiter)
       @seeker = FactoryBot.create(:seeker)
     end
-
 
     context 'Recruiterの場合' do
       it 'recruiter?でtrueを返す' do
@@ -80,7 +75,6 @@ RSpec.describe User, type: :model do
     end
 
     context 'Seekerの場合' do
-
       it 'recruiter?でfalseを返す' do
         expect(@seeker.recruiter?).to be false
       end
@@ -88,10 +82,6 @@ RSpec.describe User, type: :model do
       it 'seeker?でtrueを返す' do
         expect(@seeker.seeker?).to be true
       end
-
     end
-
   end
-
-
 end

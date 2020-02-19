@@ -11,8 +11,6 @@ class HomeController < ApplicationController
     else
       raise "Unknown User.type:(#{user.type})"
     end
-
-    
   end
 
   def recruiter_home
@@ -20,5 +18,4 @@ class HomeController < ApplicationController
 
   def seeker_home
   end
-
 end

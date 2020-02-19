@@ -64,7 +64,7 @@ Rails.application.configure do
 
   config.i18n.fallbacks = true
 
-  Slim::Engine.options[:pretty] = true  
+  Slim::Engine.options[:pretty] = true
 
   config.after_initialize do
     Bullet.enable = true

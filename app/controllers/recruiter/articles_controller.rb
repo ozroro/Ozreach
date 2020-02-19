@@ -5,7 +5,6 @@ class Recruiter::ArticlesController < ApplicationController
   before_action :only_recruiter
   before_action :collect_user, only: [:edit, :update, :destroy]
 
-
   def new
     @article = current_user.articles.build
   end
@@ -18,20 +17,16 @@ class Recruiter::ArticlesController < ApplicationController
     else
       render :fail
     end
-
   end
 
   def fail
-    
   end
-
 
   def edit
     @article = Recruiter::Article.find(params[:id])
   end
 
   def update
-
     @article = Recruiter::Article.find(params[:id])
 
     if @article.update(article_params)
@@ -39,33 +34,26 @@ class Recruiter::ArticlesController < ApplicationController
     else
       render :fail
     end
-
-    
   end
 
   def destroy
   end
 
   def articles
-    
   end
-
 
   private
-    
-  def article_params
-    params.require(:recruiter_article).permit(:title, :content, :image)
-  end
 
-  def search_params
-    search_conditions = %i(
-      all_atr_cont_terms
-      corporate_cont_terms title_cont_terms content_cont_terms
-      created_at_gteq created_at_lteq_end_of_day
-    )
-    params.fetch(:q, {}).permit(search_conditions)
-  end
+    def article_params
+      params.require(:recruiter_article).permit(:title, :content, :image)
+    end
 
-
-    
+    def search_params
+      search_conditions = %i[
+        all_atr_cont_terms
+        corporate_cont_terms title_cont_terms content_cont_terms
+        created_at_gteq created_at_lteq_end_of_day
+      ]
+      params.fetch(:q, {}).permit(search_conditions)
+    end
 end

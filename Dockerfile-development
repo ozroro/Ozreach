@@ -34,8 +34,10 @@ ENTRYPOINT [ \
     "switch", \
         "shell=bash", \
         "rspec=bundle exec rspec", \
-        "server=bundle exec rails s", "--", \
-        "server=bundle exec rails s" \
+        "puma=bundle exec rails s -p 3000 -b 0.0.0.0", \
+        "unicorn=bundle exec unicorn -c config/unicorn.rb -E development", \
+        "--",\
+    "server=bundle exec rails s" \
 ]
 
 EXPOSE 3000

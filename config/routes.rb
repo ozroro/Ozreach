@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-
   concern :profile do
     get 'profile', on: :member
   end
@@ -27,9 +25,9 @@ Rails.application.routes.draw do
   post '/applying/:article_id' => 'seeker/applicants#create', as: :applying
 
   root 'static_pages#top'
-  
+
   get '/home' => 'home#home_selector'
-  
+
   get  '/help' => 'static_pages#help'
   get  '/about' => 'static_pages#about'
   get  '/contact' => 'static_pages#contact'

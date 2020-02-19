@@ -1,5 +1,5 @@
 module Recruiter
   def self.table_name_prefix
-    'recruiter_' 
+    'recruiter_'
   end
 end
