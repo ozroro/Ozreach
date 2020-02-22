@@ -4,7 +4,11 @@
   .card.shadow.mb-4.show id="article-#{@article.id}"
     .card-header
       .text-right
-        = link_to '編集する', edit_recruiter_article_path(@article) if @article.user == current_user
+        - if @article.user == current_user
+          p
+            = link_to '編集する', edit_recruiter_article_path(@article)
+            |  / 
+            = link_to '削除する', recruiter_article_path(@article), method: :delete, data: {confirm: '本当にこの記事を削除しますか？'}
       h4.m-0.font-weight-bold.text-primary.text-center
         = link_to profile_recruiter_user_path(@article.user)
           = @article.user.profile.corporate_name
