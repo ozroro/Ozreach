@@ -18,6 +18,9 @@ html
     meta[name="author" content=""]
 
   body#page-top
+    .notifications
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: "alert #{bootstrap_class_for(key)}")
     #wrapper
       = render "layouts/#{user_type}/sidebar" 
       #content-wrapper.d-flex.flex-column

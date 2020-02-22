@@ -11,7 +11,7 @@ RSpec.describe 'Sessions', type: :system do
     end
 
     it '表示確認' do
-      expect(page).to have_content 'We craft seo and digital markting services'
+      expect(page).to have_content 'OZReach'
     end
   end
 end
