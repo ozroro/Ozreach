@@ -1,0 +1,14 @@
+linters:
+  LineLength:
+    max: 180
+
+  TrailingBlankLines: 
+    enable: false
+    
+  RuboCop:
+    ignored_cops:
+      - Style/StringLiterals
+      - Lint/Void
+      - Layout/IndentationWidth
+      - Layout/TrailingEmptyLines
+      - Metrics/BlockLength

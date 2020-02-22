@@ -11,22 +11,18 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
-
     meta[charset="utf-8"]
     meta[http-equiv="X-UA-Compatible" content="IE=edge"]
     meta[name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"]
     meta[name="description" content=""]
     meta[name="author" content=""]
 
- 
-
   body#page-top
     #wrapper
       = render "layouts/#{user_type}/sidebar" 
       #content-wrapper.d-flex.flex-column
         #content
-          = render partial: "layouts/#{user_type}/topbar", locals: {user: current_user}  
+          = render partial: "layouts/#{user_type}/topbar", locals: { user: current_user }  
           = yield
         = render "layouts/#{user_type}/footer"
     = render "layouts/#{user_type}/modal"
-
