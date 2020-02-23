@@ -6,8 +6,7 @@ class ApplicationController < ActionController::Base
 
     def login_required
       unless logged_in?
-        flash[:danger] = 'Please log in'
-        redirect_to login_url
+        redirect_to login_url, alert: 'ログインしてください'
       end
     end
 
@@ -23,10 +22,6 @@ class ApplicationController < ActionController::Base
 
     def only_seeker
       redirect_to root_url unless current_user.seeker?
-    end
-
-    def collect_user
-      redirect_to root_url unless current_user.id == params[:id]
     end
 
   # docker comment test

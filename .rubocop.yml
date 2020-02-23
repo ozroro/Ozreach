@@ -124,6 +124,11 @@ Lint/Void:
 Lint/NonDeterministicRequireOrder:
   AutoCorrect: false
 
+Lint/PercentStringArray:
+  AutoCorrect: false
+
+Lint/NonDeterministicRequireOrder:
+  AutoCorrect: false
 
 #################### Metrics ###############################
 
@@ -189,7 +194,8 @@ Naming/MethodParameterName:
 # 毎回 YAML.safe_load(yaml_str, [Date, Time]) するのは面倒で。。
 Security/YAMLLoad:
   Enabled: false
-
+Security/JSONLoad:
+  AutoCorrect: false
 
 #################### Style #################################
 

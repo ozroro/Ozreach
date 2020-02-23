@@ -1,28 +1,43 @@
+- rtest_email = 'recruiter1@test.com'
+- stest_email = 'seeker1@test.com'
+- pass = 'password'
+
 nav.navbar.navbar-expand-lg.fixed-top.trans-navigation
   .container
     = link_to root_path, class: 'navbar-brand' do
       = image_tag 'top/logo_ozreach.png', class: 'img-fluid.b-logo'
     button.navbar-toggler[type="button" data-toggle="collapse" data-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation"]
       span.navbar-toggler-icon
-        i.fa.fa-bars
+        i.fas.fa-bars
     #mainNav.collapse.navbar-collapse.justify-content-end
       ul.navbar-nav
         li.nav-item
           a.nav-link.active.smoth-scroll[href="#banner-area"]
-            | Home 
+            | トップ 
             span.sr-only
               | (current)
         li.nav-item
           a.nav-link.smoth-scroll[href="#about"]
-            | About
+            | 使い方
 
         li.nav-item
           a.nav-link.smoth-scroll[href="#blog"]
-            | Blog
+            | アピールポイント
+        li.nav-item
+        
+        li.nav-item.
+          .nav-link
+            | &nbsp; | &nbsp;  
         li.nav-item
 
+        li.nav-item
+          = link_to "ログイン", login_path, class: "login"
+        li.nav-item
 
-      = link_to "Login", login_path, class: "btn btn-outline-primary"
+        li.nav-item
+          = link_to "ユーザー登録", signup_path, class: "login"
+        li.nav-item
+ 
   
 .banner-area.banner-1#banner-area
   .overlay.gr-overlay
@@ -30,68 +45,51 @@ nav.navbar.navbar-expand-lg.fixed-top.trans-navigation
     .d-table-cell
       .container
         .row
-          .col-lg-8.m-auto.text-center.col-sm-12.col-md-12
+          .col-lg-12.m-auto.wrapper
             .banner-content.content-padding
-              h5.subtitle
-                | A creative agency
-              h1.banner-title
-                | We craft seo and digital markting services
-              p
-                | We provide marketing services to startups and small businesses to looking for a partner for their digital media, design-area.We are a a startup company to be commited to work and time management.
-              = link_to signup_path, class:'btn btn-white btn-circled' do
-                | ユーザー登録
+              .col-lg-6.col-sm-6.col-md-6
+                .banner-title
+                  | 即戦力のわたしを、
+                  .direct
+                    | ダイレクトに<br>スカウト！
+                .banner-signup
+                  .signup-btn
+                    = link_to signup_path, class:'btn btn-blue btn-rounded btn-lg btn-block'
+                      | ユーザー登録(無料)
+                  .line
+                  .text
+                    a.smoth-scroll[href="#about"]
+                      | > 使用方法はこちら
+              = image_tag 'top/banner-image.png', class: 'banner-image d-none d-md-block'
+    
+
 section#about.section-padding
   .container
     .row
       .col-lg-12.col-sm-12.col-md-12
         .section-heading
+          h1
+            | オズリーチは、求人サイトを模した
+            br
+            | WEBアプリのポートフォリオです。
           p.lead
-            | We are creative digital marketing agency with expertise to grow any business that need proper guidance and a committed service.
-    .row
-      .col-lg-5.d-none.d-lg-block.col-sm-12
-        .intro-img
-          = image_tag 'banner/why-choose.png', class: 'img-fluid'
-      .col-lg-7.col-md-12.col-sm-12
-        .row
-          .col-lg-6.col-sm-6.col-md-6
-            .intro-box
-              span
-                | 01.
-              h4
-                | Management
-              p
-                | we founded September with the goal of creating meaningful digital experiences that connect with people.
-          .col-lg-6.col-sm-6.col-md-6
-            .intro-box
-              span
-                | 02.
-              h4
-                | Strategy
-              p
-                | We’re full service which means we’ve got you covered on design & content right through to digital. 
-          .col-lg-6.col-sm-6.col-md-6
-            .intro-box
-              span
-                | 03.
-              h4
-                | Experience
-              p
-                | You’ll form a lasting relationship with us, collaboration is central to we do.Digital experiences connect people.
-          .col-lg-6.col-sm-6.col-md-6
-            .intro-box
-              span
-                | 04.
-              h4
-                | Build
-              p
-                | Technology and design are the core of success for real estate related businesses. Leverage our years.
-        .row
-          .col-lg-12
-            .intro-cta
-              p.lead
-                | Still have any question on mind ? 
-                a.smoth-scroll[href="#contact"]
-                  | Contact us
+            | 上のユーザー登録とログインから、または下のテスト用ユーザーへのログインボタンからログインできます
+          .test-login
+            .row
+              .col-lg-2.col-sm-12.col-md-12
+                = button_to 'テストリクルーター', {controller: 'sessions', action: 'create'}, params: {session: {email: rtest_email, password: pass }}
+              .col-lg-10.col-sm-12.col-md-12
+                p
+                  | 募集記事の作成、記事の一覧表示、応募者の一覧表示と確認ができます。
+                    右上のアイコンからログアウトとプロフィール設定で団体名の登録ができます。
+            .row
+              .col-lg-2.col-sm-12.col-md-12
+                = button_to 'テスト求職ユーザー', controller: 'sessions', action: 'create', params: {session: {email: stest_email, password: pass }}
+              .col-lg-10.col-sm-12.col-md-12
+                p
+                  | 主に募集記事の検索と応募， 登録企業の検索，応募履歴の確認と取り消しができます。
+                    また、右上のアイコンからプロフィールの設定とログアウトができます。
+
 
 section#blog.section-padding.bg-main
   .container
@@ -99,49 +97,58 @@ section#blog.section-padding.bg-main
       .col-lg-12.col-sm-12.m-auto
         .section-heading
           h4.section-title
-            | Latest Blog news
-          .line
-          p
-            | Our blog journey may come handy to build a community to make more effective success for business. Latest and trend tricks will help a lot 
+            | アピールポイント
+
     .row
-      .col-lg-4.col-sm-6.col-md-4
-        .blog-block
-          = image_tag 'blog/blog-1.jpg', class: 'img-fluid'
-          .blog-text
-            h6.author-name
-              span
-                | Tips and tricks
-              | john Doe
-            a.h5.my-2.d-inline-block[href="blog-single.html"]
-              |  Best tips to grow your content quality and standard. 
-            p
-              | If you want to grow your content quality and standard you should foolow these tips properly voluptatibus.
-      .col-lg-4.col-sm-6.col-md-4
-        .blog-block
-          = image_tag 'blog/blog-2.jpg', class: 'img-fluid'
-          .blog-text
-            h6.author-name
-              span
-                | Branding
-              | john Doe
-            a.h5.my-2.d-inline-block[href="blog-single.html"]
-              |  Brand your site at top in few minuts. 
-            p
-              | Brand your site at top, boost your audioance corporis facilis animi voluptas alias ex saepe quo voluptatibus.
-      .col-lg-4.col-sm-6.col-md-4
-        .blog-block
-          = image_tag 'blog/blog-3.jpg', class: 'img-fluid'
-          .blog-text
-            h6.author-name
-              span
-                | Marketing
-              | john Doe
-            a.h5.my-2.d-inline-block[href="blog-single.html"]
-              |  How to become a best sale 
-              br
-              | marketer in a year! 
-            p
-              | Becomeing a best sale marketer is not easy but not impossible too.Need to follow up some proper guidance and strategy .
+      .col-lg-4.d-none.d-lg-block.col-sm-12
+        .intro-img
+          = image_tag 'top/skills-logo.png', class: 'img-fluid'
+      .col-lg-8.col-md-12.col-sm-12
+        .row
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              h4 基本的な機能
+              p
+                | - 記事一覧表示・記事詳細表示・記事投稿・画像投稿・記事検索・ページネーション等基本的な機能を実装しました。
+                br
+                | - Ruby on RailsフレームワークでREST APIに基づく設計を行い、
+                | モデルのリレーション管理からAjax・STIやモジュールを用いたモデルの共通化等のRailsに関する実践的な技術にも取り組みました。
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              h4 テストと関連技術
+              p
+                | - リバースプロキシとしてNginxサーバーを使用しています。DBにはMySQLを使用しています。
+                br
+                | - RSpecとCapybaraにより主要要素の単体テストとシステムテストを行っています。
+                br
+                | - GitやGitHubでのプルリクを活用しています。静的解析ツール(Rubocop等)を活用しつつコードのリファクタリングに努めています。
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              h4 AWSへのデプロイ
+              p
+                | - AWS上に本アプリをデプロイしています。
+                br
+                | - サーバーとしてECS・EC2、画像投稿にS3、DBとしてRDS、Dockerイメージの保存にECR使用しています。
+                br
+                | - IAMRoleやパラメータストアを用いたクレデンシャルの管理等、セキュリティ面にも注意を払っています。
+          .col-lg-6.col-sm-6.col-md-6
+            .intro-box
+              h4 DockerとCI/CD
+              p
+                | - Dockerを用いてコンテナ化したアプリをECSで配置しています。
+                br
+                | - Docker-composeを利用してNginx + Rails + MySQL +selenium chromeの開発/本番環境をローカルにワンコマンドで立ち上げられます。
+                br
+                | - CircleCIとGitHubを連携させ、テスト・ビルド・ECSサービスへのデプロイを自動化しています。
+
+        .row
+          .col-lg-12
+            .intro-cta
+              p.lead
+                | その他、構築・開発環境や機能の詳細は 
+                a.smoth-scroll[href="#contact"]
+                  | こちらのページへ
+
 
 section#footer.section-padding
   .container
@@ -219,5 +226,5 @@ section#footer.section-padding
     .row
       .col-lg-12.text-center
         .footer-copy
-          |  © 2018 Promodise inc. All Rights Reserved. 
+          |  © 2020 OZReach. All Rights Reserved. 
 

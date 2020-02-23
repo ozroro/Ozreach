@@ -37,6 +37,13 @@ class Recruiter::ArticlesController < ApplicationController
   end
 
   def destroy
+    @article = Recruiter::Article.find(params[:id])
+
+    if @article.destroy
+      redirect_to home_path, notice: '記事を削除しました。'
+    else
+      render :fail
+    end
   end
 
   def articles
@@ -55,5 +62,9 @@ class Recruiter::ArticlesController < ApplicationController
         created_at_gteq created_at_lteq_end_of_day
       ]
       params.fetch(:q, {}).permit(search_conditions)
+    end
+
+    def collect_user
+      redirect_to root_url unless current_user.articles.exists?(id: params[:id])
     end
 end

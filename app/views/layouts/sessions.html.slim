@@ -15,4 +15,7 @@ html
     meta[name="description" content=""]
     meta[name="author" content=""]
   body.bg-gradient-primary
+    .notifications
+    - flash.each do |key, value|
+      = content_tag(:div, value, class: "alert #{bootstrap_class_for(key)}")
     = yield

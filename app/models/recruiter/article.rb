@@ -7,7 +7,8 @@ class Recruiter::Article < ApplicationRecord
 
   has_many :applicants,
            class_name: '::Seeker::Applicant',
-           foreign_key: 'recruiter_article_id'
+           foreign_key: 'recruiter_article_id',
+           dependent: :destroy
 
   has_many :seeker_users,
            through: :applicants,

@@ -52,12 +52,13 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'bullet'
-  gem 'html2slim'
+  gem 'html2slim', require: false
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'slim_lint', require: false
   # gem 'rubocop-rspec', require: false
 end
 
