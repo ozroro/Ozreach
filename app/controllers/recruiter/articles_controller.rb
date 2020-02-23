@@ -40,8 +40,7 @@ class Recruiter::ArticlesController < ApplicationController
     @article = Recruiter::Article.find(params[:id])
 
     if @article.destroy
-      redirect_to home_path
-      flash[:notice] = '記事を削除しました。'
+      redirect_to home_path, notice: '記事を削除しました。'
     else
       render :fail
     end

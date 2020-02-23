@@ -15,8 +15,7 @@ class Seeker::ApplicantsController < ApplicationController
 
     if (@applicant.user == current_user) && @applicant.save
       # TODO: :notice
-      flash[:success] = '応募しました。'
-      redirect_to seeker_applicants_path
+      redirect_to seeker_applicants_path, flash: { success: '応募しました。' }
     else
       # TODO: エラー表示
       redirect_to root_path
@@ -26,11 +25,12 @@ class Seeker::ApplicantsController < ApplicationController
   def destroy
     @applicant = Seeker::Applicant.find(params[:id])
     if @applicant.user == current_user && @applicant.destroy
-      # TODO: :notice
-      flash[:alert] = '応募を取り消しました'
-      # TODO: elseを加えて エラー表示
+      redirect_to seeker_applicants_path, alert: '応募を取り消しました'
+
+    else
+      flash.now[:error] = 'エラーが発生しました。'
+      render :index
     end
-    redirect_to seeker_applicants_path
   end
 
   private

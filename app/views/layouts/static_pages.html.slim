@@ -17,4 +17,7 @@ html
 
 
   body[data-spy="scroll" data-target=".fixed-top"]
+    .notifications
+      - flash.each do |key, value|
+        = content_tag(:div, value, class: "alert #{bootstrap_class_for(key)}")
     = yield
