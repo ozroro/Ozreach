@@ -11,7 +11,11 @@ class ArticlesController < ApplicationController
   end
 
   def show
-    @article = Recruiter::Article.find(params[:id])
+    if (@article = Recruiter::Article.find_by(id: params[:id]))
+    else
+      flash[:error] = '記事が存在しないか、削除されました。'
+      redirect_to home_path
+    end
   end
 
   private

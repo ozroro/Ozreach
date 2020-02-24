@@ -22,6 +22,7 @@ class Recruiter::ArticlesController < ApplicationController
   def fail
   end
 
+  # TODO: 無いidを参照したときのエラー表示
   def edit
     @article = Recruiter::Article.find(params[:id])
   end

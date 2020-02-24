@@ -25,15 +25,19 @@ class Recruiter::UsersController < UsersController
   end
 
   def profile
-    @user = User.find(params[:id])
-    @profile = @user.profile
+    if (@user = Recruiter::User.find_by(id: params[:id]))
+      @profile = @user.profile
+    else
+      flash[:error] = 'ユーザーが存在しないか、削除されました。'
+      redirect_to root_path
+    end
   end
 
   def articles
-    @user = User.find(params[:id])
-    if @user.recruiter?
+    if (@user = Recruiter::User.find_by(id: params[:id]))
       @articles = @user.articles
     else
+      flash[:error] = 'ユーザーが存在しないか、削除されました。'
       redirect_to root_url
     end
   end

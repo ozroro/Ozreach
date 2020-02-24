@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     user = current_user
 
     if user.recruiter?
-      @articles = user.articles.includes(:image_attachment)
+      @articles = user.articles.includes(:image_attachment).recent
       render :recruiter_home
     elsif user.seeker?
       render :seeker_home

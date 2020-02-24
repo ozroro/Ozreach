@@ -14,17 +14,14 @@ class Seeker::ApplicantsController < ApplicationController
     @applicant = current_user.applicants.build(recruiter_article_id: params[:article_id])
 
     if (@applicant.user == current_user) && @applicant.save
-      # TODO: :notice
       redirect_to seeker_applicants_path, flash: { success: '応募しました。' }
     else
-      # TODO: エラー表示
-      redirect_to root_path
+      redirect_to root_path, flash: { error: 'エラーが発生しました。' }
     end
   end
 
   def destroy
-    @applicant = Seeker::Applicant.find(params[:id])
-    if @applicant.user == current_user && @applicant.destroy
+    if (@applicant = Seeker::Applicant.find_by(id: params[:id])) && @applicant.user == current_user && @applicant.destroy
       redirect_to seeker_applicants_path, alert: '応募を取り消しました'
 
     else
