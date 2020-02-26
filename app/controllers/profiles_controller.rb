@@ -1,4 +1,5 @@
 # ログインしている自分のプロファイルの表示、編集
+# TODO: プロフィールがない場合のテスト
 class ProfilesController < ApplicationController
   before_action :profile_is_present
 

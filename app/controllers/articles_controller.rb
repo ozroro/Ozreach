@@ -10,6 +10,7 @@ class ArticlesController < ApplicationController
     @pagy, @articles = pagy(@articles)
   end
 
+  # TODO: 存在しない記事のテスト
   def show
     if (@article = Recruiter::Article.find_by(id: params[:id]))
     else
