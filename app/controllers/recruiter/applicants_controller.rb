@@ -8,6 +8,7 @@ class Recruiter::ApplicantsController < ApplicationController
     @pagy, @applicants = pagy(@applicants, items: 20)
   end
 
+  # TODO: destroy作成
   def destroy
   end
 

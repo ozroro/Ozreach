@@ -6,9 +6,9 @@
       .text-right
         - if @article.user == current_user
           p
-            = link_to '編集する', edit_recruiter_article_path(@article)
+            = link_to '編集', edit_recruiter_article_path(@article)
             |  / 
-            = link_to '削除する', recruiter_article_path(@article), method: :delete, data: {confirm: '本当にこの記事を削除しますか？'}
+            = link_to '削除', recruiter_article_path(@article), method: :delete, data: {confirm: '本当にこの記事を削除しますか？'}
       h4.m-0.font-weight-bold.text-primary.text-center
         = link_to profile_recruiter_user_path(@article.user)
           = @article.user.profile.corporate_name

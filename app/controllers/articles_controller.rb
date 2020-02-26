@@ -10,8 +10,13 @@ class ArticlesController < ApplicationController
     @pagy, @articles = pagy(@articles)
   end
 
+  # TODO: 存在しない記事のテスト
   def show
-    @article = Recruiter::Article.find(params[:id])
+    if (@article = Recruiter::Article.find_by(id: params[:id]))
+    else
+      flash[:error] = '記事が存在しないか、削除されました。'
+      redirect_to home_path
+    end
   end
 
   private
