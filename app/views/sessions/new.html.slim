@@ -17,8 +17,8 @@
                     = f.password_field :password, class: 'form-control form-control-user', id: 'session_password', placeholder: "パスワード"
                   .form-group
                     .custom-control.custom-checkbox.small
-                      input#customCheck.custom-control-input[type="checkbox"]
-                      label.custom-control-label[for="customCheck"]
+                      = f.check_box :remember_me, class: "custom-control-input"
+                      = f.label :remember_me, class: "custom-control-label"
                         | ログイン情報を保存
                   = f.submit 'ログイン', class: 'btn btn-primary btn-user btn-block', id: 'login-btn'
                 hr
