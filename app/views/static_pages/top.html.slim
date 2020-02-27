@@ -76,16 +76,16 @@ section#about.section-padding
             | 上のユーザー登録とログインから、または下のテスト用ユーザーへのログインボタンからログインできます
           .test-login
             .row
-              .col-lg-2.col-sm-12.col-md-12
-                = button_to 'テストリクルーター', {controller: 'sessions', action: 'create'}, params: {session: {email: rtest_email, password: pass }}
-              .col-lg-10.col-sm-12.col-md-12
+              .col-lg-3.col-sm-12.col-md-12
+                = button_to 'リクルーターテスト用', {controller: 'sessions', action: 'create'}, params: {session: {email: rtest_email, password: pass }}
+              .col-lg-9.col-sm-12.col-md-12
                 p
                   | 募集記事の作成、記事の一覧表示、応募者の一覧表示と確認ができます。
                     右上のアイコンからログアウトとプロフィール設定で団体名の登録ができます。
             .row
-              .col-lg-2.col-sm-12.col-md-12
-                = button_to 'テスト求職ユーザー', controller: 'sessions', action: 'create', params: {session: {email: stest_email, password: pass }}
-              .col-lg-10.col-sm-12.col-md-12
+              .col-lg-3.col-sm-12.col-md-12
+                = button_to '一般ユーザーテスト用', controller: 'sessions', action: 'create', params: {session: {email: stest_email, password: pass }}
+              .col-lg-9.col-sm-12.col-md-12
                 p
                   | 主に募集記事の検索と応募， 登録企業の検索，応募履歴の確認と取り消しができます。
                     また、右上のアイコンからプロフィールの設定とログアウトができます。
