@@ -14,7 +14,7 @@ class Seeker::ApplicantsController < ApplicationController
     @applicant = current_user.applicants.build(recruiter_article_id: params[:article_id])
 
     if (@applicant.user == current_user) && @applicant.save
-      redirect_to seeker_applicants_path, flash: { success: '応募しました。' }
+      redirect_to seeker_applicants_path, flash: { success: "#{@applicant.title}に応募しました。" }
     else
       redirect_to root_path, flash: { error: 'エラーが発生しました。' }
     end
