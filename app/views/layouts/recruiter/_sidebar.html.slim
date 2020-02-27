@@ -11,20 +11,28 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
       span
         | Home
   li.nav-item
+    = link_to articles_path, class: 'nav-link'
+      i.fas.fa-fw.fa-newspaper
+      span
+        | 新着募集記事
+  hr.sidebar-divider.d-none.d-md-block
+
+  li.nav-item
     = link_to new_recruiter_article_path, class: 'nav-link'
       i.fas.fa-fw.fa-pen-alt
       span
         | 募集を作成する
   li.nav-item
-    = link_to articles_path, class: 'nav-link'
+    = link_to articles_recruiter_user_path(current_user), class: 'nav-link'
       i.fas.fa-fw.fa-newspaper
       span
-        | 記事一覧
+        | 自分の記事
+
   li.nav-item
     = link_to recruiter_applicants_path, class: 'nav-link'
       i.fas.fa-fw.fa-user-tie
       span
-        | 応募者一覧      
+        | 応募者管理      
 
 
   hr.sidebar-divider.d-none.d-md-block

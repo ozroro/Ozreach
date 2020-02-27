@@ -1,0 +1,8 @@
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    = "#{@user.name}の募集一覧"
+  = render partial: 'searchform', locals: { q: @q } 
+
+  = render partial: "shared/article", collection: @articles
+  .d-flex.justify-content-center
+    == pagy_bootstrap_nav(@pagy) if @pagy.pages > 1

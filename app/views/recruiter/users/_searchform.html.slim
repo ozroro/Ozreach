@@ -1,0 +1,23 @@
+.card.shadow.mb-4
+  = search_form_for q, url: :articles do |f|
+    .card-header
+      .form-group.row
+        = f.label :all_atr_cont_terms, '検索ワード', class: 'col-auto col-form-label'
+        = f.search_field :all_atr_cont_terms, class: "form-control col-9 mr-auto", placeholder: "Search for...", "aria-label": "Search"
+        button.btn.btn-outline-secondary.col-auto[type="button" data-toggle="collapse" data-target="#deep-refiner1" aria-expanded="false" aria-controls="deep-refiner1"]
+          | 詳細条件
+    #deep-refiner1.collapse
+      .card-body
+        .form-group.row
+          = f.label :title_cont_terms, 'タイトル：', class: 'col-sm-2 col-form-label'
+          = f.search_field :title_cont_terms, class: "form-control col-9 mr-auto", placeholder: "Search for...", "aria-label": "Search"
+        .form-group.row
+          = f.label :content_cont_terms, '本文：', class: 'col-sm-2 col-form-label'
+          = f.search_field :content_cont_terms, class: "form-control col-9 mr-auto", placeholder: "Search for...", "aria-label": "Search"
+        .form-group.row
+          = f.label :created_at_gteq, '日付：', class: 'col-sm-2 col-form-label'
+          = f.search_field :created_at_gteq, class: "form-control col-4", placeholder: "20xx-xx-xx", "aria-label": "Search"
+          .col-1.text-center ～
+          = f.search_field :created_at_lteq_end_of_day, class: "form-control col-4", placeholder: "20xx-xx-xx", "aria-label": "Search"
+    .card-footer
+      = f.submit class: "btn btn-primary"

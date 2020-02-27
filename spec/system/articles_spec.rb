@@ -61,6 +61,7 @@ RSpec.describe 'Articles', type: :system do
     context '文章のみの投稿' do
       it '投稿した記事が表示される' do
         click_on '投稿する'
+        visit articles_recruiter_user_path(user_recruiter)
         expect(page).to have_selector '.card-title', text: 'エンジニア募集'
         expect(page).to have_selector '.card-text', text: 'AWSができるバックエンドエンジニアを募集します。'
       end
@@ -85,7 +86,7 @@ RSpec.describe 'Articles', type: :system do
         fill_in 'タイトル', with: '営業募集'
         fill_in 'コンテント', with: '営業を募集します'
         click_on '投稿する'
-
+        visit articles_recruiter_user_path(user_recruiter)
         expect(page).to have_selector '.card-title', text: '営業募集'
         expect(page).to have_selector '.card-text', text: '営業を募集します'
       end
