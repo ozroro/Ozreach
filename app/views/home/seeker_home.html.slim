@@ -1,48 +1,44 @@
 .container-fluid
   .d-sm-flex.align-items-center.justify-content-between.mb-4
     h1.h3.mb-0.text-gray-800
-      | Cards
+      | ホーム
 
   .row
     .col-lg-6
       .card.mb-4
         .card-header
-          | Default Card Example
+          | ようこそ
         .card-body
-          | This card uses Bootstrap's default styling with no utility classes added. Global styles are the only things modifying the look and feel of this default card example.
+          | 左側のメニューから募集記事や企業の検索ができます。各記事の詳細から応募ができます。
       .card.shadow.mb-4
         .card-header.py-3
           h6.m-0.font-weight-bold.text-primary
-            | Basic Card Example
+            = link_to "応募履歴", seeker_applicants_path
         .card-body
-          | The styling for this basic card example is created by using default Bootstrap utility classes. By using utility classes, the style of the card component can be easily modified with no need for any custom CSS!
+          .table-responsive
+            table.table.table-hover[width="100%"]
+              thead
+                tr
+                  th[scope="col"] 募集ID
+                  th[scope="col"] 企業/団体 名
+                  th[scope="col"] 募集記事タイトル
+                  th[scope="col"] 応募日時
+              tbody
+                = render partial: 'applicant', collection: @applicants
+          .text-center
+            = link_to "応募履歴一覧",  seeker_applicants_path
     .col-lg-6
       .card.shadow.mb-4
         .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
           h6.m-0.font-weight-bold.text-primary
-            | Dropdown Card Example
-          .dropdown.no-arrow
-            a#dropdownMenuLink.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
-              i.fas.fa-ellipsis-v.fa-sm.fa-fw.text-gray-400
-            .dropdown-menu.dropdown-menu-right.shadow.animated--fade-in[aria-labelledby="dropdownMenuLink"]
-              .dropdown-header
-                | Dropdown Header:
-              a.dropdown-item[href="#"]
-                | Action
-              a.dropdown-item[href="#"]
-                | Another action
-              .dropdown-divider
-              a.dropdown-item[href="#"]
-                | Something else here
+            | 新着記事
         .card-body
-          | Dropdown menus can be placed in the card header in order to extend the functionality of a basic card. In this dropdown card example, the Font Awesome vertical ellipsis icon in the card header can be clicked on in order to toggle a dropdown menu.
-      .card.shadow.mb-4
-        a.d-block.card-header.py-3[href="#collapseCardExample" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample"]
-          h6.m-0.font-weight-bold.text-primary
-            | Collapsable Card Example
-        #collapseCardExample.collapse.show
-          .card-body
-            | This is a collapsable card example using Bootstrap's built in collapse functionality.
-            strong
-              | Click on the card header
-            | to see the card body collapse and expand!
+          .table-responsive
+            table.table.table-hover[width="100%"]
+              thead
+                tr
+                  th[scope="col"] 企業/団体 名
+                  th[scope="col"] 募集記事タイトル
+                  th[scope="col"] 作成/更新日
+              tbody
+                = render partial: 'article', collection: @articles

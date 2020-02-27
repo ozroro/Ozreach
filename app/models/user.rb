@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  email           :string(255)      not null
+#  name            :string(255)      not null
+#  password_digest :string(255)      not null
+#  type            :string(255)      not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 # STIでReruiter::UserとSeeker::Userがそれぞれ継承する
 # type には　Recruiter::User と　Seeker::Userがクラスに応じて入力される
 # sessionではユーザーの種類をほとんど区別せずに扱う

@@ -16,5 +16,5 @@
           = link_to article_path(article), class: "btn btn-secondary stretched-link"
             | 記事を読む
     .card-footer.text-muted.text-right
-      = article.created_at
+      = l article.created_at, format: :short
 

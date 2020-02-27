@@ -2,4 +2,4 @@ tr
   th[scope="row"] = applicant.id
   td = link_to "#{applicant.user.id}：#{applicant.user.name}", profile_seeker_user_path(applicant.user)
   td = link_to "#{applicant.recruiter_article.id}：#{applicant.recruiter_article.title}", article_path(applicant.recruiter_article)
-  td = applicant.created_at
+  td = l applicant.created_at, format: :short

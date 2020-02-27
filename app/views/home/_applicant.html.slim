@@ -1,0 +1,5 @@
+tr
+  th[scope="row"] = applicant_counter
+  td = applicant.corporate_name
+  td = link_to applicant.title, article_path(applicant.recruiter_article)
+  td = l applicant.created_at, format: :short

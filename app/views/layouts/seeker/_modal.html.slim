@@ -5,14 +5,14 @@ a.scroll-to-top.rounded[href="#page-top"]
     .modal-content
       .modal-header
         h5#exampleModalLabel.modal-title
-          | Ready to Leave?
+          | ログアウトしますか?
         button.close[type="button" data-dismiss="modal" aria-label="Close"]
           span[aria-hidden="true"]
             | ×
       .modal-body
-        | Select "Logout" below if you are ready to end your current session.
+        | よろしければ、下記の"ログアウト"を選択して現在のセッションを終了します。
       .modal-footer
         button.btn.btn-secondary[type="button" data-dismiss="modal"]
-          | Cancel
+          | キャンセル
         = link_to logout_path, method: :delete, class: "btn btn-primary" do
-          | Logout    
+          | ログアウト

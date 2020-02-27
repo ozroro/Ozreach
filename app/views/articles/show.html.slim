@@ -26,6 +26,6 @@
           a.applicant_button.btn.btn-primary[href="#" data-toggle="modal" data-target="#applyingModal"]
             | 応募する
     .card-footer.text-muted.text-right
-      = @article.created_at
+      = l @article.created_at, format: :short
 
 = render partial: 'applying_modal', locals: { article: @article } if current_user.unsubscribed_seeker?(@article)

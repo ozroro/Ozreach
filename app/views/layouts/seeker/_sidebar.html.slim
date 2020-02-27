@@ -7,59 +7,27 @@ ul#accordionSidebar.navbar-nav.bg-gradient-primary.sidebar.sidebar-dark.accordio
   hr.sidebar-divider.my-0
   li.nav-item
     = link_to home_path, class: "nav-link"
-      i.fas.fa-fw.fa-tachometer-alt
+      i.fas.fa-fw.fa-home
       span
         | Home
   hr.sidebar-divider.my-0
   li.nav-item
     = link_to articles_path, class: 'nav-link'
-      i.fas.fa-fw.fa-tachometer-alt
+      i.far.fa-fw.fa-newspaper
       span
         | 募集を探す
   li.nav-item
     = link_to seeker_recruiters_path, class: 'nav-link'
-      i.fas.fa-fw.fa-tachometer-alt
+      i.fas.fa-fw.fa-building
       span
         | 企業を探す
   li.nav-item
     = link_to seeker_applicants_path, class: 'nav-link'
-      i.fas.fa-fw.fa-tachometer-alt
+      i.fas.fa-fw.fa-history
       span
         | 応募履歴
 
-  hr.sidebar-divider
-  .sidebar-heading
-    |  Interface 
-  li.nav-item.active
-    a.nav-link[href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"]
-      i.fas.fa-fw.fa-cog
-      span
-        | Components
-    #collapseTwo.collapse.show[aria-labelledby="headingTwo" data-parent="#accordionSidebar"]
-      .bg-white.py-2.collapse-inner.rounded
-        h6.collapse-header
-          | Custom Components:
-        a.collapse-item[href="buttons.html"]
-          | Buttons
-        a.collapse-item.active[href="cards.html"]
-          | Cards
-  li.nav-item
-    a.nav-link.collapsed[href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities"]
-      i.fas.fa-fw.fa-wrench
-      span
-        | Utilities
-    #collapseUtilities.collapse[aria-labelledby="headingUtilities" data-parent="#accordionSidebar"]
-      .bg-white.py-2.collapse-inner.rounded
-        h6.collapse-header
-          | Custom Utilities:
-        a.collapse-item[href="utilities-color.html"]
-          | Colors
-        a.collapse-item[href="utilities-border.html"]
-          | Borders
-        a.collapse-item[href="utilities-animation.html"]
-          | Animations
-        a.collapse-item[href="utilities-other.html"]
-          | Other
+
 
   hr.sidebar-divider.d-none.d-md-block
   .text-center.d-none.d-md-inline
