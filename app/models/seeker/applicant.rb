@@ -18,6 +18,8 @@
 #  fk_rails_...  (recruiter_article_id => recruiter_articles.id)
 #  fk_rails_...  (user_id => users.id)
 #
+
+# TODO: seekerのnamespceに置く必要ないし、拡張するときに複雑になるのでrootに移行させたい
 class Seeker::Applicant < ApplicationRecord
   belongs_to :user
   belongs_to :recruiter_article, class_name: '::Recruiter::Article'
