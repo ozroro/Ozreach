@@ -1,28 +1,70 @@
-# README
+OZReach
+====
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ 
+ ![top](https://user-images.githubusercontent.com/12100701/75609348-0acb6c80-5b4b-11ea-9aaa-d7d03fcc064f.png)
+Ruby On Railsで書いた求人情報サイトのWebアプリです。トップページだけB○zreachを意識してデザインしました。
+## Description
+求人サイトのWebアプリです。ユーザータイプとしてリクルーターと求職者の２タイプがあり登録時にユーザータイプを選択できます。
+### リクルーター
+求人広告記事の作成ができます。
+記事には画像の添付ができ、編集・削除も可能です。
+また他のユーザーの作成した記事の検索もできます。  
+自分の記事に応募してきた求職者の一覧と個別の情報が確認できます。
+プロフィールには企業の名前と自社の紹介、画像を登録することができます。
 
-Things you may want to cover:
+### 求職者
+記事の検索と表示・リクルーターの検索と表示ができます。
+各記事には応募ボタンがあり、そのボタンを押すことで記事に応募することができます。
+自分がした応募は応募履歴ページで確認でき、その詳細や応募の取り消しが可能です。
+プロフィールには自己紹介と画像を登録することができます。
 
-* Ruby version
+### その他 
+ローカルにリポジトリを展開しdocker-composeでproductionとdevelopment環境をすぐに立ち上げられるようにしています。  
+docker-composeではNginx + Rails + MySQL + selenium-chromeの４つのコンテナが起動します。  
+基本的には自分のポートフォリオの一部として、そしてスキル習得のために制作したので
+本番サービスとして使えるまではブラッシュアップされてません。
 
-* System dependencies
 
-* Configuration
+## Requirement
+ローカルマシンで立ち上げるためには
+Dockerとdocker-composeが必要です。  
+docker-composeのファイルフォーマットをVersion3.7に設定しているため、
+docker-composeは18.06.0以上のバージョンを使用してください。
 
-* Database creation
 
-* Database initialization
+## Usage
+### ユーザー登録・ログイン
+トップページの上部のユーザー登録からアカウントを登録とログインができます。また、テスト用のアカウントにログインできるボタンをトップページに用意しています。
 
-* How to run the test suite
+### 基本操作  
+  左のサイドバーから選択して募集記事の作成や検索などユーザータイプに応じたアクションができます。
+### プロフィール設定とログアウト  
+  右上のユーザーアイコンをクリックするとドロップダウンメニューが表示されそこに、プロフィールとログアウトのリンクがあります。プロフィール表示画面から自分のプロフィール設定やアイコン画像の登録ができます。ログアウトリンクを押すとモーダルが表示されログアウトできます。
+  
 
-* Services (job queues, cache servers, search engines, etc.)
+## Install
+docker-composeを使用してローカルで立ち上げる方法を記載します。  
+このリポジトリをローカルにpullした後、必要な環境変数を設定するため`.env-example`を`.env`にリネームして編集します。ファイル記載のコメントに従ってproduction/developmentモードの起動選択やDBの設定、development環境での立ち上げコマンドなどを設定します。 
 
-* Deployment instructions
+初回起動時にはDBのセットアップが必要なので
+```
+docker-compose run rails bin/rails db:setup
+```
+を行います。初回のこの作業にはビルド時間も含め5分～10分程度は時間がかかります。  
 
-* ...
-* 
+完了後
+```
+docker-compose up
+```
+で起動し、ブラウザからlocalhost:8080(pumaの場合は3000)でアプリの確認ができます。
+
+## Licence
+
+[MIT](https://github.com/ozroro/Ozreach/blob/master/LICENSE.txt)
+
+## Author
+[使用したテンプレートや画像素材](https://github.com/ozroro/Ozreach/blob/master/AUTHORS.txt)
 
 
 
