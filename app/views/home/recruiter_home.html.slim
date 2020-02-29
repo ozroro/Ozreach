@@ -1,5 +1,44 @@
-.container
-  h1.h3.mb-0.text-gray-800.mb-4
-    | ホーム
+.container-fluid
+  .d-sm-flex.align-items-center.justify-content-between.mb-4
+    h1.h3.mb-0.text-gray-800
+      | ホーム
 
-  = render partial: "shared/article", collection: @articles
+  .row
+    .col-lg-6
+      .card.mb-4
+        .card-header
+          | ようこそ
+        .card-body
+          | 左側のメニューから募集の作成や現在公開されている全記事の検索ができます。応募者一覧から応募者の確認ができます。
+      .card.shadow.mb-4
+        .card-header.py-3
+          h6.m-0.font-weight-bold.text-primary
+            = link_to "応募状況", recruiter_applicants_path
+        .card-body
+          .table-responsive
+            table.table.table-hover[width="100%"]
+              thead
+                tr
+                  th[scope="col"] 募集ID
+                  th[scope="col"] ユーザー
+                  th[scope="col"] 応募先の記事
+                  th[scope="col"] 応募日時
+              tbody
+                = render partial: 'home/recruiter/applicant', collection: @applicants
+          .text-center
+            = link_to "応募者一覧",  recruiter_applicants_path
+    .col-lg-6
+      .card.shadow.mb-4
+        .card-header.py-3.d-flex.flex-row.align-items-center.justify-content-between
+          h6.m-0.font-weight-bold.text-primary
+            | 自分の記事
+        .card-body
+          .table-responsive
+            table.table.table-hover[width="100%"]
+              thead
+                tr
+                  th[scope="col"] 企業/団体 名
+                  th[scope="col"] 募集記事タイトル
+                  th[scope="col"] 作成/更新日
+              tbody
+                = render partial: 'article', collection: @articles

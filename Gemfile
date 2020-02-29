@@ -59,6 +59,7 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'slim_lint', require: false
+  gem 'annotate'
   # gem 'rubocop-rspec', require: false
 end
 

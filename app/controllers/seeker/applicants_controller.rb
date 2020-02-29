@@ -10,11 +10,13 @@ class Seeker::ApplicantsController < ApplicationController
     @pagy, @applicants = pagy(@applicants, items: 20)
   end
 
+  # TODO: <<(*records) の方式の記述で簡潔に書けそう
+  # @article << current_user
   def create
     @applicant = current_user.applicants.build(recruiter_article_id: params[:article_id])
 
     if (@applicant.user == current_user) && @applicant.save
-      redirect_to seeker_applicants_path, flash: { success: '応募しました。' }
+      redirect_to seeker_applicants_path, flash: { success: "#{@applicant.title}に応募しました。" }
     else
       redirect_to root_path, flash: { error: 'エラーが発生しました。' }
     end

@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
 
     if @user&.authenticate(session_params[:password])
       log_in(@user)
+      session_params[:remember_me] == '1' ? remember(@user) : forget(@user)
       redirect_to root_path, notice: 'ログインしました。'
     else
       render :new
@@ -14,13 +15,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    reset_session
+    log_out if logged_in?
     redirect_to root_path, notice: 'ログアウトしました。'
   end
 
   private
 
     def session_params
-      params.require(:session).permit(:email, :password)
+      params.require(:session).permit(:email, :password, :remember_me)
     end
 end

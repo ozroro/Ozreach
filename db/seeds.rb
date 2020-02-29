@@ -49,5 +49,5 @@ end
 RECORD.times do |n|
   seeker = Seeker::User.create!(name: Faker::Name.name, email: "seeker#{n}@test.com", password: 'password', password_confirmation: 'password')
   seeker.create_profile!(content: 'Seeker Profile')
-  (1..Recruiter::Article.count).to_a.sample(30).each {|article_id| seeker.applicants.create!(recruiter_article_id: article_id) }
+  (1..Recruiter::Article.count).to_a.sample(15).each {|article_id| seeker.applicants.create!(recruiter_article_id: article_id) }
 end
