@@ -27,5 +27,15 @@
             | 応募する
     .card-footer.text-muted.text-right
       = l @article.created_at, format: :short
-
+  - if @article.user == current_user
+    .card.shadow.mb-4
+      .card-body
+        table.table
+          thead
+            tr
+              th[scope="col"] = "応募ID"
+              th[scope="col"] = "ユーザー"
+              th[scope="col"] = "応募日"
+          tbody
+            = render partial: "applicant", collection: @article.applicants
 = render partial: 'applying_modal', locals: { article: @article } if current_user.unsubscribed_seeker?(@article)
