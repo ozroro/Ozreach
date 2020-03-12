@@ -107,7 +107,7 @@ nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
         - if user.profile.image.attached?
           = image_tag user.profile.icon, class: 'img-profile rounded-circle'
         - else
-          img.img-profile.rounded-circle[src="https://source.unsplash.com/QAB-WJcbgJk/60x60"]
+          = image_tag 'icon/blank-profile.png', class: 'img-profile rounded-circle'
       .dropdown-menu.dropdown-menu-right.shadow.animated--grow-in[aria-labelledby="userDropdown"]
         = link_to profile_path, class: 'dropdown-item'
           i.fas.fa-user.fa-sm.fa-fw.mr-2.text-gray-400

@@ -8,7 +8,8 @@ Rails.application.routes.draw do
       get 'articles', on: :member
     end
     resources :articles, except: [:index, :show]
-    resources :applicants, only: [:index, :destory]
+    resources :applicants, only: [:index, :show, :update, :destroy]
+
     # get 'signup' => 'users#new'
   end
 

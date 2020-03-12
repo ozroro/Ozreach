@@ -1,0 +1,22 @@
+.container
+  h1.h3.mb-0.text-gray-800.mb-4
+    = "応募ID[#{@applicant.id}]の管理"
+
+  .card.shadow.mb-4
+    .card-body
+      table.table
+        thead
+          tr
+            th[scope="col"] 応募ID
+            th[scope="col"] ユーザー
+            th[scope="col"] 応募先の記事
+            th[scope="col"] 応募日
+            th[scope="col"] 状態
+        tbody
+          = render partial: "applicant", locals: {applicant: @applicant} 
+
+  .card.shadow.mb-4
+    .card-body
+      = form_with model: @applicant, url: recruiter_applicant_path do |f|
+        = f.select(:status, Seeker::Applicant.status_strings)
+        = f.submit class: "btn btn-primary"

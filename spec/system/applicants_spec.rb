@@ -1,10 +1,44 @@
 require 'rails_helper'
 
-RSpec.describe 'Articles', type: :system do
+RSpec.describe 'Applicants', type: :system do
+  let(:user_recruiter) { FactoryBot.create(:recruiter, email: 'recruiter@test.com') }
+  let(:user_seeker) { FactoryBot.create(:seeker, email: 'seeker@test.com', name: 'テストシーカー') }
+  let!(:article_a) { FactoryBot.create(:article, title: 'Railsプログラマー募集', user: user_recruiter) }
+  let!(:applicant_a) { FactoryBot.create(:seeker_applicant, user: user_seeker, recruiter_article: article_a) }
+  before do
+    visit login_path
+    fill_in 'session_email', with: login_user.email
+    fill_in 'session_password', with: login_user.password
+    click_button 'login-btn'
+  end
+
   #
   # 応募一覧の確認
   # 1シーカーで確認
   # 2リクルーターで確認
+  describe '応募一覧の確認' do
+    context 'Seeker 応募履歴' do
+      let(:login_user) { user_seeker }
+      before { visit seeker_applicants_path }
+      it 'ページタイトルの表示' do
+        expect(page).to have_content '応募履歴'
+      end
+      it '応募済みの募集記事のタイトルが表示される' do
+        expect(page).to have_content 'Railsプログラマー募集'
+      end
+    end
+
+    context 'Recruiter 応募者一覧' do
+      let(:login_user) { user_recruiter }
+      before { visit recruiter_applicants_path }
+      it 'ページタイトルの表示' do
+        expect(page).to have_content '応募者一覧'
+      end
+      it '応募したユーザーが表示される' do
+        expect(page).to have_content 'テストシーカー'
+      end
+    end
+  end
 
   # A. 応募ボタンの確認
   # A-1 シーカーログイン

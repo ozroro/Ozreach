@@ -3,6 +3,7 @@
 # Table name: seeker_applicants
 #
 #  id                   :bigint           not null, primary key
+#  status               :integer          default("0"), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  recruiter_article_id :bigint
