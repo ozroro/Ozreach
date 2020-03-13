@@ -17,6 +17,9 @@
 
   .card.shadow.mb-4
     .card-body
-      = form_with model: @applicant, url: recruiter_applicant_path do |f|
-        = f.select(:status, Seeker::Applicant.status_strings)
-        = f.submit class: "btn btn-primary"
+      = form_with model: @applicant, url: recruiter_applicant_path, class: "form-row align-items-center" do |f|
+        .col-auto.my-1 管理状態の変更
+        .col-auto.my-1
+          = f.select :status, Seeker::Applicant.status_strings, {}, {class: "form-control"}
+        .col-auto.my-1
+          = f.submit class: "btn btn-primary"
