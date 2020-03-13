@@ -6,3 +6,28 @@
     overflow: hidden;
   }
 }
+
+td.article-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.table-link {
+  tbody {
+    tr{
+      td,
+      th {
+        padding: 0;
+      }
+
+      a {
+        padding: 0.75rem;
+        display: block;
+        text-decoration: none;
+        color: #858796
+      }
+    }
+  }
+}

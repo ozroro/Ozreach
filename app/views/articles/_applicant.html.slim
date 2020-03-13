@@ -1,4 +1,5 @@
+- applicant_path = recruiter_applicant_path(applicant)
 tr
-  th[scope="row"] = applicant.id
-  td = link_to "#{applicant.user.id}：#{applicant.user.name}", profile_seeker_user_path(applicant.user)
-  td = l applicant.created_at, format: :short
+  th[scope="row"] = link_to applicant.id, applicant_path
+  td = link_to "#{applicant.user.id}：#{applicant.user.name}", applicant_path
+  td = link_to l(applicant.created_at, format: :short), applicant_path
