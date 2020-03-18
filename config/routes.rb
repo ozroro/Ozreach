@@ -23,6 +23,11 @@ Rails.application.routes.draw do
   # post  'appllcant/:article_id' => 'seeker/applicant#create'
   resource :profile, only: [:edit, :show, :update]
   resources :articles, only: [:show, :index]
+  resources :notifications, only: [:index, :show, :destroy] do
+    patch 'read', on: :member
+    put 'read', on: :member
+    delete 'destroy_all', on: :collection
+  end
   post '/applying/:article_id' => 'seeker/applicants#create', as: :applying
 
   root 'static_pages#top'

@@ -3,7 +3,7 @@
 # Table name: seeker_applicants
 #
 #  id                   :bigint           not null, primary key
-#  status               :integer          default("0"), not null 0:応募中 1:応募受理 2審査中 3:完了
+#  status               :integer          default("0"), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
 #  recruiter_article_id :bigint
@@ -20,7 +20,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 
-# TODO: seekerのnamespceに置く必要ないし、拡張するときに複雑になるのでrootに移行させたい
+# HACK: seekerのnamespceに置く必要ないし、拡張するときに複雑になるのでrootに移行させたい
 class Seeker::Applicant < ApplicationRecord
   belongs_to :user
   belongs_to :recruiter_article, class_name: '::Recruiter::Article'
@@ -29,7 +29,7 @@ class Seeker::Applicant < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
-  @status_strings = [['応募中', 0], ['応募受理', 1], ['審査中', 2], ['完了', 3]]
+  STATUS_STRINGS = ['応募中', '応募受理', '審査中', '完了'].freeze
   class << self
     attr_reader :status_strings
   end
@@ -47,6 +47,6 @@ class Seeker::Applicant < ApplicationRecord
   end
 
   def status_string
-    self.class.status_strings[self.status][0]
+    STATUS_STRINGS[self.status]
   end
 end

@@ -28,6 +28,7 @@ services:
       - public:/myapp/public
       - sockets:/myapp/tmp/sockets/
       - bundle:/usr/local/bundle/
+      - ~/.ssh:/root/.ssh:ro
     ports:
       - "3000:3000"
     links:

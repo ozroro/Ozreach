@@ -10,7 +10,7 @@ class Seeker::ApplicantsController < ApplicationController
     @pagy, @applicants = pagy(@applicants, items: 20)
   end
 
-  # TODO: <<(*records) の方式の記述で簡潔に書けそう
+  # HACK: <<(*records) の方式の記述で簡潔に書けそう
   # @article << current_user
   def create
     @applicant = current_user.applicants.build(recruiter_article_id: params[:article_id])
