@@ -4,4 +4,4 @@ tr id="applicant-#{applicant.id}"
   td = link_to "#{applicant.user.id}：#{applicant.user.name}", applicant_path
   td.article-title = link_to applicant.recruiter_article.title, applicant_path
   td = link_to l(applicant.created_at, format: :short), applicant_path
-  td.status = link_to applicant.status_string, applicant_path
+  td.status = link_to applicant.status_text, applicant_path

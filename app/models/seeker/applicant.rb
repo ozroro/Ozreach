@@ -22,17 +22,15 @@
 
 # HACK: seekerのnamespceに置く必要ないし、拡張するときに複雑になるのでrootに移行させたい
 class Seeker::Applicant < ApplicationRecord
+  extend Enumerize
+  extend ActiveModel::Naming
   belongs_to :user
   belongs_to :recruiter_article, class_name: '::Recruiter::Article'
 
   validates :user_id, uniqueness: { scope: :recruiter_article_id, message: 'すでに応募しています' }
 
   scope :recent, -> { order(created_at: :desc) }
-
-  STATUS_STRINGS = ['応募中', '応募受理', '審査中', '完了'].freeze
-  class << self
-    attr_reader :status_strings
-  end
+  enumerize :status, in: { applied: 0, review: 1, done: 2 }
 
   def corporate_name
     self.recruiter_article.user.profile.corporate_name
@@ -44,9 +42,5 @@ class Seeker::Applicant < ApplicationRecord
 
   def title
     self.recruiter_article.title
-  end
-
-  def status_string
-    STATUS_STRINGS[self.status]
   end
 end

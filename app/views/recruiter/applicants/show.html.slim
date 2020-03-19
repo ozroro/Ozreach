@@ -20,6 +20,6 @@
       = form_with model: @applicant, url: recruiter_applicant_path, class: "form-row align-items-center" do |f|
         .col-auto.my-1 管理状態の変更
         .col-auto.my-1
-          = f.select :status, status_options, {}, {class: "form-control"}
+          = f.select :status, Seeker::Applicant.status.options, {}, {class: "form-control"}
         .col-auto.my-1
           = f.submit class: "btn btn-primary"
