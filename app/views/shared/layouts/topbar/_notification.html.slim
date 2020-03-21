@@ -1,0 +1,9 @@
+=link_to notification, class: 'dropdown-item d-flex align-items-center'
+  .mr-3
+    .icon-circle class=notification.bg
+      i.fas.text-white class=notification.icon
+  div
+    .small.text-gray-500
+      = notification.time_ago_in_words
+    span.font-weight-bold
+      = notification.description

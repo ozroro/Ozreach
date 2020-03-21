@@ -5,19 +5,19 @@ class NotificationsController < ApplicationController
 
   def show
     notification = find_notification
-    notification.update_attribute(:read, true)
-    redirecto_to notification.path
+    notification.update_attribute(:read_flag, true)
+    redirect_to notification.path
   end
 
   def destroy
     notification = find_notification
     notification.destroy
-    redirecto_to notifications_path
+    redirect_to notifications_path
   end
 
   def read
     notification = find_notification
-    notification.update(:read, true)
+    notification.update(:read_flag, true)
   end
 
   def clear_all

@@ -28,44 +28,32 @@ class Notification < ApplicationRecord
   MAX_SIZE = 100
 
   scope :recent, -> { order(created_at: :desc) }
-  scope :unread, -> { where(read_flag: false) }
+  scope :unread, -> { where(read_flag: false).order(created_at: :desc) }
+
+  validates :link_type, inclusion: { in: %w[my_profile article recruiter_applicants recruiter_applicant seeker_applicants] }
 
   # TODO: このサイズ制限を確認するテストを作成する
-  def limit_notifications_size
-    notifications = user.notifications
-    if notifications.size > MAX_SIZE
-      notifications.first.destroy
-    end
-  end
+  # notification > MAXSIZEの場合一番古いものを削除
 
   def path
-    # links = {
-    #   'my_profile'            => profile_path,
-    #   'article'               => article_path(link_option),
-    #   'recruiter_applicants'  => recruiter_applicants_path,
-    #   'recruiter_applicant'   => recruiter_applicant_path(link_option),
-    #   'seeker_applicants'     => seeker_applicants_path
-    # }
     case link_type
-    # 共通パス
-    when 'my_profile'
-      profile_path
-    when 'article'
-      article_path(link_option)
-
-    # リクルーターパス
-    when 'recruiter_applicants'
-      recruiter_applicants_path
-    when 'recruiter_applicant'
-      recruiter_applicant_path(link_option)
-
-    # シーカーパス
-    when seeker_applicants
-      seeker_applicants_path
+    when 'my_profile'           then profile_path
+    when 'article'              then article_path(link_option)
+    when 'recruiter_applicants' then recruiter_applicants_path
+    when 'recruiter_applicant'  then recruiter_applicant_path(link_option)
+    when 'seeker_applicants'    then seeker_applicants_path
     # TODO: seeker_applicant 個別のページを作ったら対応する
-
     else
       raise "Unknown Notification#link_type : (#{link_type})"
     end
   end
+
+  private
+
+    def limit_notifications_size
+      notifications = user.notifications
+      if notifications.size > MAX_SIZE
+        notifications.first.destroy
+      end
+    end
 end

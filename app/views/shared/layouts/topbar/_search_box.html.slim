@@ -1,0 +1,6 @@
+= form_with scope: :q, url: articles_path, method: 'get', local: true, class: "d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" do |f|
+  .input-group
+    = f.text_field :all_atr_cont_terms, class: 'form-control bg-light border-0 small', 'aria-describedby': "basic-addon2", placeholder: "会社や募集を検索"
+    .input-group-append
+      = button_tag type: 'submit', class: 'btn btn-primary'
+        i.fas.fa-search.fa-sm

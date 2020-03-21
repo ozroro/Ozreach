@@ -15,12 +15,16 @@ gem 'mysql2', '~> 0.5.3'
 gem 'unicorn'
 gem 'enumerize'
 gem 'draper'
+gem 'slim-rails'
+gem 'faker'
+gem 'font-awesome-sass', '~> 5.11.2'
+gem 'pagy', '~> 3.5'
+gem 'ransack'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 4.11'
   gem 'puma', '~> 4.3'
-  # gem 'coffee-rails', '~> 4.2'
 end
 
 group :development do
@@ -48,12 +52,4 @@ group :production do
   gem 'aws-sdk-s3', require: false
 end
 
-gem 'slim-rails'
-# gem 'bootstrap'
-# gem 'jquery-rails'
-gem 'faker'
 
-gem 'font-awesome-sass', '~> 5.11.2'
-# gem 'jquery-easing-rails'
-gem 'pagy', '~> 3.5'
-gem 'ransack'
