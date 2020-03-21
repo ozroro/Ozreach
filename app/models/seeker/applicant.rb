@@ -32,7 +32,7 @@ class Seeker::Applicant < ApplicationRecord
   validates :user_id, uniqueness: { scope: :recruiter_article_id, message: 'すでに応募しています' }
   scope :recent, -> { order(created_at: :desc) }
 
-  after_create :notify_recruiter_applying
+  after_create :notify_recruiter_applied
   after_destroy :notify_recruiter_cancel
   after_update :notify_seeker_status_change
 
