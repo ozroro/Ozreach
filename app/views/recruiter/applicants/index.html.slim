@@ -4,13 +4,14 @@
 
   .card.shadow.mb-4
     .card-body
-      table.table
+      table.table.table-hover.table-link
         thead
           tr
             th[scope="col"] = sort_link(@q, :id, "応募ID")
             th[scope="col"] = sort_link(@q, :user_id, "ユーザー")
             th[scope="col"] = sort_link(@q, :recruiter_article_title, "応募先の記事")
             th[scope="col"] = sort_link(@q, :created_at, "応募日")
+            th[scope="col"] = sort_link(@q, :status, "状態")
         tbody
           = render partial: "applicant", collection: @applicants
 

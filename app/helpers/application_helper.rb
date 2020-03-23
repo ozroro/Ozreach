@@ -2,17 +2,12 @@ module ApplicationHelper
   include Pagy::Frontend
 
   def bootstrap_class_for(flash_type)
-    case flash_type.to_sym
-    when :success
-      'alert-success'
-    when :error
-      'alert-danger'
-    when :alert
-      'alert-warning'
-    when :notice
-      'alert-info'
-    else
-      flash_type.to_s
-    end
+    flash_to_bootstrap_class = {
+      success: 'alert-success',
+      error: 'alert-danger',
+      alert: 'alert-warning',
+      notice: 'alert-info'
+    }.with_indifferent_access
+    flash_to_bootstrap_class[flash_type] || flash_type.to_s
   end
 end

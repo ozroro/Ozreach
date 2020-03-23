@@ -17,7 +17,7 @@
 #
 #  fk_rails_...  (user_id => users.id)
 #
-# TODO: rootのネームスペースに移行する
+# HACK: rootのネームスペースに移行する
 class Recruiter::Article < ApplicationRecord
   belongs_to :user
   has_one_attached :image

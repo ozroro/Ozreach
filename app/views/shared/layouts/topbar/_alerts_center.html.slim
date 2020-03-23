@@ -1,0 +1,10 @@
+a#alertsDropdown.nav-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+  i.fas.fa-bell.fa-fw
+  span.badge.badge-danger.badge-counter
+    = notification_badge_counter
+.dropdown-list.dropdown-menu.dropdown-menu-right.shadow.animated--grow-in[aria-labelledby="alertsDropdown"]
+  h6.dropdown-header
+    | お知らせ
+  == render(partial: "shared/layouts/topbar/notification" , collection: recent_notifications) || '<div class="dropdown-item　text-center text-gray-500">新しい通知はありません</div>'
+  a.dropdown-item.text-center.small.text-gray-500[href="#"]
+    | もっと見る

@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 RECORD = 50
-SAMPLE = 3
+SAMPLE = 4
 
 # t = Time.current
 # サンプルデータを作成するクラス

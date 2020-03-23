@@ -25,6 +25,10 @@ class User < ApplicationRecord
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
+  has_many :notifications, dependent: :destroy
+
+  after_create :notify_to_edit_profile
+
   def recruiter?
     self.type == 'Recruiter::User'
   end
@@ -47,7 +51,6 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(@remember_token))
   end
 
-  # 渡されたトークンがダイジェストと一致したらtrueを返す
   def authenticated?(remember_token)
     return false if remember_digest.nil?
 
@@ -58,20 +61,24 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, nil)
   end
 
-  # 渡された文字列のハッシュ値を返す
   def self.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
 
-  # ランダムなトークンを返す
   def self.new_token
     SecureRandom.urlsafe_base64
   end
 
   private
 
-    # メールアドレスをすべて小文字にする
+    def notify_to_edit_profile
+      self.notifications.create(
+        link_type: 'my_profile',
+        description: 'OZReachへようこそ。プロフィールを設定しましょう。',
+      )
+    end
+
     def downcase_email
       self.email.downcase!
     end

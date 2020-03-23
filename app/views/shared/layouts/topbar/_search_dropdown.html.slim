@@ -1,0 +1,9 @@
+a#searchDropdown.nav-link.dropdown-toggle[href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+  i.fas.fa-search.fa-fw
+.dropdown-menu.dropdown-menu-right.p-3.shadow.animated--grow-in[aria-labelledby="searchDropdown"]
+  = form_with scope: :q, url: articles_path, method: 'get', local: true, class: "form-inline mr-auto w-100 navbar-search" do |f|
+    .input-group
+      = f.text_field :all_atr_cont_terms, class: 'form-control bg-light border-0 small', 'aria-describedby': "basic-addon2", placeholder: "会社や募集を検索"
+      .input-group-append
+        = button_tag type: 'submit', class: 'btn btn-primary'
+          i.fas.fa-search.fa-sm

@@ -23,9 +23,20 @@
             = simple_format(h(@article.content), {}, sanitize: false)
       - if current_user.unsubscribed_seeker?(@article)
         .row.py-3
-          a.applicant_button.btn.btn-primary[href="#" data-toggle="modal" data-target="#applyingModal"]
+          a.applicant_button.btn.btn-primary#article-button[href="#" data-toggle="modal" data-target="#applyingModal"]
             | 応募する
     .card-footer.text-muted.text-right
       = l @article.created_at, format: :short
-
+  - if @article.user == current_user
+    h4.text-center この募集への応募者一覧
+    .card.shadow.mb-4
+      .card-body
+        table.table.table-link.table-hover
+          thead
+            tr
+              th[scope="col"] = "応募ID"
+              th[scope="col"] = "ユーザー"
+              th[scope="col"] = "応募日"
+          tbody
+            = render partial: "applicant", collection: @applicants
 = render partial: 'applying_modal', locals: { article: @article } if current_user.unsubscribed_seeker?(@article)

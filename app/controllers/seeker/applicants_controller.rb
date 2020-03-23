@@ -10,12 +10,9 @@ class Seeker::ApplicantsController < ApplicationController
     @pagy, @applicants = pagy(@applicants, items: 20)
   end
 
-  # TODO: <<(*records) の方式の記述で簡潔に書けそう
-  # @article << current_user
   def create
     @applicant = current_user.applicants.build(recruiter_article_id: params[:article_id])
-
-    if (@applicant.user == current_user) && @applicant.save
+    if @applicant.save
       redirect_to seeker_applicants_path, flash: { success: "#{@applicant.title}に応募しました。" }
     else
       redirect_to root_path, flash: { error: 'エラーが発生しました。' }
@@ -23,9 +20,8 @@ class Seeker::ApplicantsController < ApplicationController
   end
 
   def destroy
-    if (@applicant = Seeker::Applicant.find_by(id: params[:id])) && @applicant.user == current_user && @applicant.destroy
+    if (@applicant = current_user.applicants.find_by(id: params[:id])) && @applicant.destroy
       redirect_to seeker_applicants_path, alert: '応募を取り消しました'
-
     else
       flash.now[:error] = 'エラーが発生しました。'
       render :index

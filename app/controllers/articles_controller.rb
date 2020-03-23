@@ -13,6 +13,7 @@ class ArticlesController < ApplicationController
   # TODO: 存在しない記事のテスト
   def show
     if (@article = Recruiter::Article.find_by(id: params[:id]))
+      @applicants = @article.applicants.includes(:user) if current_user.recruiter?
     else
       flash[:error] = '記事が存在しないか、削除されました。'
       redirect_to home_path

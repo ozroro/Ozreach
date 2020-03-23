@@ -1,5 +1,11 @@
 ---
 ja:
+  enumerize:
+    seeker/applicant:
+      status:
+        applied: '応募'
+        review: '選考'
+        done: '完了'
   activerecord:
     errors:
       messages:

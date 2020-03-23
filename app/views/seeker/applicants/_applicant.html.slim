@@ -1,8 +1,11 @@
 tr
   th[scope="row"] = applicant_counter
-  td = applicant.corporate_name
-  td = applicant.title
+  td = link_to applicant.corporate_name, profile_recruiter_user_path(applicant.recruiter)
+  td = link_to applicant.title, article_path(applicant.recruiter_article)
   td = l applicant.created_at, format: :short
+  td = applicant.status_text
   td 
-    = link_to '詳細', article_path(applicant.recruiter_article), class: "btn btn-info" 
-    = link_to '取消', seeker_applicant_path(applicant), method: :delete, data: {confirm: "取り消しますか？"}, class: "btn btn-danger ml-2"
+    = link_to '取消',
+      seeker_applicant_path(applicant),
+      method: :delete, data: {confirm: "取り消しますか？"},
+      class: "btn btn-danger ml-2", id: "applicant-#{applicant.id}" if applicant.status == 0

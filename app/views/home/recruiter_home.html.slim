@@ -16,15 +16,16 @@
             = link_to "応募状況", recruiter_applicants_path
         .card-body
           .table-responsive
-            table.table.table-hover[width="100%"]
+            table.table.table-hover.table-link[width="100%"]
               thead
                 tr
-                  th[scope="col"] 募集ID
+                  th[scope="col"] 応募ID
                   th[scope="col"] ユーザー
                   th[scope="col"] 応募先の記事
-                  th[scope="col"] 応募日時
+                  th[scope="col"] 応募日
+                  th[scope="col"] 状態
               tbody
-                = render partial: 'home/recruiter/applicant', collection: @applicants
+                = render partial: "recruiter/applicants/applicant", collection: @applicants
           .text-center
             = link_to "応募者一覧",  recruiter_applicants_path
     .col-lg-6
@@ -34,7 +35,7 @@
             | 自分の記事
         .card-body
           .table-responsive
-            table.table.table-hover[width="100%"]
+            table.table.table-hover.table-link[width="100%"]
               thead
                 tr
                   th[scope="col"] 企業/団体 名

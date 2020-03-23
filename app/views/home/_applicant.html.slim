@@ -1,5 +1,6 @@
+- article_path = article_path(applicant.recruiter_article)
 tr
-  th[scope="row"] = applicant_counter
-  td = applicant.corporate_name
-  td = link_to applicant.title, article_path(applicant.recruiter_article)
-  td = l applicant.created_at, format: :short
+  th[scope="row"] = link_to applicant_counter, article_path
+  td = link_to applicant.corporate_name, article_path
+  td = link_to applicant.title, article_path
+  td = link_to l(applicant.created_at, format: :short), article_path
