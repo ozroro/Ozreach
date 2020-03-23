@@ -21,10 +21,10 @@
 #
 FactoryBot.define do
   factory :notification do
-    user { '' }
-    read_flag { '' }
-    link_type { 'MyString' }
-    link_option { 'MyString' }
-    content { 'MyString' }
+    user
+    read_flag { false }
+    link_type { 'my_profile' }
+    link_option { '' }
+    sequence(:description) {|n| "Notification No:#{n}" }
   end
 end

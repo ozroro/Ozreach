@@ -24,7 +24,6 @@ class Notification < ApplicationRecord
   include Rails.application.routes.url_helpers
   belongs_to :user
 
-  validate :limit_notifications_size
   MAX_SIZE = 100
 
   scope :recent, -> { order(created_at: :desc) }
@@ -32,8 +31,8 @@ class Notification < ApplicationRecord
 
   validates :link_type, inclusion: { in: %w[my_profile article recruiter_applicants recruiter_applicant seeker_applicants] }
 
-  # TODO: このサイズ制限を確認するテストを作成する
   # notification > MAXSIZEの場合一番古いものを削除
+  after_commit :destroy_oldest_notification, if: :reached_limit?
 
   def path
     case link_type
@@ -50,10 +49,13 @@ class Notification < ApplicationRecord
 
   private
 
-    def limit_notifications_size
-      notifications = user.notifications
-      if notifications.size > MAX_SIZE
-        notifications.first.destroy
-      end
+    def reached_limit?
+      self.user.notifications.size > MAX_SIZE
+    end
+
+    def destroy_oldest_notification
+      num = self.user.notifications.size - MAX_SIZE
+      oldest_notifications = self.user.notifications.order(:created_at).first(num)
+      oldest_notifications.each(&:destroy)
     end
 end

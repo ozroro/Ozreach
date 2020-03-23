@@ -23,7 +23,7 @@
             = simple_format(h(@article.content), {}, sanitize: false)
       - if current_user.unsubscribed_seeker?(@article)
         .row.py-3
-          a.applicant_button.btn.btn-primary[href="#" data-toggle="modal" data-target="#applyingModal"]
+          a.applicant_button.btn.btn-primary#article-button[href="#" data-toggle="modal" data-target="#applyingModal"]
             | 応募する
     .card-footer.text-muted.text-right
       = l @article.created_at, format: :short

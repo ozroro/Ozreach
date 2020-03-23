@@ -5,6 +5,7 @@ RSpec.describe 'Articles', type: :system do
   let(:user_seeker) { FactoryBot.create(:seeker, email: 'seeker@test.com') }
   let!(:article_a) { FactoryBot.create(:article, title: 'Railsプログラマー募集', user: user_recruiter) }
 
+  # ログイン処理、login_userはcontext毎にletで書き換えて使用
   before do
     visit login_path
     fill_in 'session_email', with: login_user.email

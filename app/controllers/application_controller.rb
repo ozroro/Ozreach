@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   # HACK: コントローラにhelperをインクルードするとコントローラがhelperに依存することになるので避けたい
-  # concernを使って逆方向にする
+  # concernのモジュールを作る
   include SessionsHelper
 
   private

@@ -13,5 +13,5 @@
         button.btn.btn-secondary[type="button" data-dismiss="modal"]
           | Cancel
         = form_with model: article
-        = link_to applying_path(article), method: :post, class: "btn btn-primary" do
+        = link_to applying_path(article), method: :post, class: "btn btn-primary", id: "modal-button" do
           | 応募する

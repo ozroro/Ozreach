@@ -3,19 +3,18 @@ require 'rails_helper'
 RSpec.describe 'Applicants', type: :system do
   let(:user_recruiter) { FactoryBot.create(:recruiter, email: 'recruiter@test.com') }
   let(:user_seeker) { FactoryBot.create(:seeker, email: 'seeker@test.com', name: 'テストシーカー') }
-  let!(:article_a) { FactoryBot.create(:article, title: 'Railsプログラマー募集', user: user_recruiter) }
-  let!(:applicant_a) { FactoryBot.create(:seeker_applicant, user: user_seeker, recruiter_article: article_a) }
+  let!(:applied_article) { FactoryBot.create(:article, title: 'Railsプログラマー募集', user: user_recruiter) }
+  let!(:applicant) { FactoryBot.create(:seeker_applicant, user: user_seeker, recruiter_article: applied_article) }
+  let(:unapplied_article) { FactoryBot.create(:article, title: 'バックエンドエンジニア募集', user: user_recruiter) }
+
   before do
     visit login_path
+    # login_userは後でletで書き換える
     fill_in 'session_email', with: login_user.email
     fill_in 'session_password', with: login_user.password
     click_button 'login-btn'
   end
 
-  #
-  # 応募一覧の確認
-  # 1シーカーで確認
-  # 2リクルーターで確認
   describe '応募一覧の確認' do
     context 'Seeker 応募履歴' do
       let(:login_user) { user_seeker }
@@ -40,26 +39,53 @@ RSpec.describe 'Applicants', type: :system do
     end
   end
 
-  # A. 応募ボタンの確認
-  # A-1 シーカーログイン
-  # A-2 応募済み記事の表示　
-  # A-3 応募ボタンが無いことを確認
-  # A-4 応募してない記事の表示
-  # A-5 応募ボタンがあることを確認
+  describe '応募ボタンの確認' do
+    let(:login_user) { user_seeker }
+    context '応募済みの記事' do
+      before { visit article_path(applied_article) }
+      it '応募ボタンが無い' do
+        expect(page).not_to have_css '.applicant_button'
+      end
+    end
+    context '応募していない記事' do
+      before do
+        visit article_path(unapplied_article)
+      end
+      it '応募ボタンがある' do
+        expect(page).to have_css '.applicant_button'
+      end
+    end
+  end
 
-  # B. 応募作成
-  # B-1 シーカーログイン
-  # B-2 応募してない記事ページを表示
-  # B-3 応募ボタンを押す
-  # B-4 応募確認モーダルの応募するボタンを押す
-  # B-5 応募一覧ページを表示
-  # B-6 新しい応募があることを確認
+  describe '応募作成' do
+    let(:login_user) { user_seeker }
 
-  # C. 応募削除
-  # C-1 シーカーログイン
-  # C-2 応募履歴ページを表示する
-  # C-3 取り消しボタンを押す
-  # C-4 確認のOKを押す
-  # C-5 応募履歴ページを表示する
-  # C-6 応募が消されたことを確認
+    before do
+      visit article_path(unapplied_article)
+      click_on 'article-button'
+      click_on 'modal-button'
+    end
+
+    context 'Seeker' do
+      it '応募履歴ページに応募がある' do
+        visit seeker_applicants_path
+        expect(page).to have_content 'バックエンドエンジニア募集'
+      end
+    end
+  end
+
+  describe '応募削除' do
+    context 'Seeker 応募削除' do
+      let(:login_user) { user_seeker }
+      before do
+        visit seeker_applicants_path
+        click_on "applicant-#{applicant.id}"
+        page.driver.browser.switch_to.alert.accept
+      end
+      it '応募済みの募集記事のタイトルが削除' do
+        visit seeker_applicants_path
+        expect(page).not_to have_content 'Railsプログラマー募集'
+      end
+    end
+  end
 end

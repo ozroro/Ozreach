@@ -21,7 +21,7 @@ class NotificationsController < ApplicationController
   end
 
   def clear_all
-    current_user.notifications&.destroy_all
+    current_user.notifications.clear
   end
 
   private
