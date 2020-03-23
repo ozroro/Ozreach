@@ -3,7 +3,7 @@ git_source(:github) {|repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
-gem 'rails', '~> 5.2.3'
+gem 'rails', '~> 5.2.4.2'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
@@ -20,6 +20,8 @@ gem 'faker'
 gem 'font-awesome-sass', '~> 5.11.2'
 gem 'pagy', '~> 3.5'
 gem 'ransack'
+
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
